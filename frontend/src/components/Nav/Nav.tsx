@@ -1,11 +1,11 @@
-import './Nav.css'
+import "./Nav.css"
 
 function Nav() {
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navbar-dark primary-color fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
         <div className="container">
-          <a className="navbar-brand" href="#">Navbar</a>
+          <a className="navbar-brand" href="/">Markup</a>
 
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
                   aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,37 +14,22 @@ function Nav() {
 
           <div className="collapse navbar-collapse" id="basicExampleNav">
 
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <a className="nav-link" href="#">Home
-                  <span className="sr-only">(current)</span>
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Features</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Pricing</a>
-              </li>
+            <ul className="navbar-nav mr-auto"></ul>
 
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true"
-                   aria-expanded="false">Dropdown</a>
-                <div className="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                  <a className="dropdown-item" href="#">Action</a>
-                  <a className="dropdown-item" href="#">Another action</a>
-                  <a className="dropdown-item" href="#">Something else here</a>
-                </div>
+            <ul className="navbar-nav">
+              <li className="nav-item nav-item-custom">
+                <a className="nav-link" href="#">Docs</a>
               </li>
-
+              <li className="nav-item nav-item-custom">
+                <a className="nav-link" href="#">GitHub</a>
+              </li>
+              <li className="nav-item nav-item-custom">
+                <a className="nav-link" href="#">Generator</a>
+              </li>
+              <li className="nav-item nav-item-custom">
+                <a className="nav-link" href="#">Annotate</a>
+              </li>
             </ul>
-
-            <form className="form-inline">
-              <div className="md-form my-0">
-                <input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
-              </div>
-            </form>
           </div>
         </div>
       </nav>

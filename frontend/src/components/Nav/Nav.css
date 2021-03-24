@@ -1,0 +1,9 @@
+.navbar-custom {
+    background-color: #333;
+    box-shadow: none;
+    padding: 25px;
+}
+
+.nav-item-custom {
+    margin-right: 25px
+}
