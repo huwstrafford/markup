@@ -3,52 +3,40 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom"
 
 import Nav from "../Nav/Nav"
 import Footer from "../Footer/Footer"
 import Landing from "../Landing/Landing"
+import Docs from "../Docs/Docs"
+import Generator from "../Generator/Generator"
+import Annotate from "../Annotate/Annotate"
 
 function App() {
   return (
     <>
+      <Nav/>
+
       <Router>
         <Switch>
           <Route path="/docs">
-            <About/>
+            <Docs/>
           </Route>
           <Route path="/generator">
-            <Users/>
+            <Generator/>
           </Route>
           <Route path="/annotate">
-            <Home/>
+            <Annotate/>
           </Route>
           <Route path="/">
-            <Home/>
+            <Landing/>
           </Route>
         </Switch>
       </Router>
-    </>
-  )
-}
 
-export default App
-
-function Home() {
-  return (
-    <>
-      <Nav/>
-      <Landing/>
       <Footer/>
     </>
   )
 }
 
-function About() {
-  return <h2>About</h2>
-}
-
-function Users() {
-  return <h2>Users</h2>
-}
+export default App
