@@ -4,7 +4,7 @@ enum Endpoint {
     Documentation = "/docs",
     Repository = "https://github.com/samueldobbie/markup",
     DataGenerator = "/generator",
-    Setup = "/setup",
+    SetupForm = "/setup",
     Annotate = "/annotate",
     Demo = "/demo",
     PageNotFound = "/404",

@@ -7,7 +7,7 @@ function Annotate() {
   if (localStorage.getItem('isSetup') != null) {
     return <h1>Annotate</h1>
   } else {
-    return <Redirect to={Endpoint.Setup}></Redirect>
+    return <Redirect to={Endpoint.SetupForm}></Redirect>
   }
 }
 
