@@ -1,4 +1,4 @@
-import "./Generator.css"
+import "@markup/components/Generator/Generator.css"
 
 function Generator() {
   return (

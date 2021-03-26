@@ -1,4 +1,4 @@
-import "./Landing.css"
+import "@markup/components/Landing/Landing.css"
 
 function Landing() {
   return (

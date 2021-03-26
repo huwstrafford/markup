@@ -1,4 +1,4 @@
-import "./Footer.css"
+import "@markup/components/Footer/Footer.css"
 
 function Footer() {
   return (

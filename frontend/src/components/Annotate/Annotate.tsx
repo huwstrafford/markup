@@ -1,4 +1,4 @@
-import "./Annotate.css"
+import "@markup/components/Annotate/Annotate.css"
 
 function Annotate() {
   return (

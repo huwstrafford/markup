@@ -1,41 +1,58 @@
-import Endpoint from "@markup/helpers/endpoint"
-import "./Nav.css"
+import { Component } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
+import {
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavItem,
+  MDBNavLink,
+  MDBNavbarToggler,
+  MDBCollapse,
+  MDBFormInline,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from 'mdbreact'
 
-function Nav() {
-  return (
-    <header>
-      <nav className="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom">
-        <div className="container">
-          <a className="navbar-brand" href={Endpoint.Home}>Markup</a>
+import '@markup/components/Nav/Nav.css'
+import Endpoint from '@markup/helpers/endpoint'
 
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                  aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+class Nav extends Component {
+  state = { isOpen: false }
 
-          <div className="collapse navbar-collapse" id="basicExampleNav">
+  toggleCollapse = () => {
+    this.setState({ isOpen: !this.state.isOpen })
+  }
 
-            <ul className="navbar-nav mr-auto"></ul>
-
-            <ul className="navbar-nav">
-              <li className="nav-item nav-item-custom">
-                <a className="nav-link" href={Endpoint.Documentation}>Docs</a>
-              </li>
-              <li className="nav-item nav-item-custom">
-                <a className="nav-link" href={Endpoint.Repository} target="_blank" rel="noreferrer">GitHub</a>
-              </li>
-              <li className="nav-item nav-item-custom">
-                <a className="nav-link" href={Endpoint.DataGenerator}>Generator</a>
-              </li>
-              <li className="nav-item nav-item-custom">
-                <a className="nav-link" href={Endpoint.Annotate}>Annotate</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-  )
+  render() {
+    return (
+      <Router>
+        <MDBNavbar color="indigo" dark expand="md" className="navbar-custom">
+          <MDBNavbarBrand>
+            <strong className="white-text">Markup</strong>
+          </MDBNavbarBrand>
+          <MDBNavbarToggler onClick={this.toggleCollapse} />
+          <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+            <MDBNavbarNav right>
+              <MDBNavItem>
+                <MDBNavLink to={Endpoint.Documentation}>Docs</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to={Endpoint.Repository}>GitHub</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to={Endpoint.DataGenerator}>Generator</MDBNavLink>
+              </MDBNavItem>
+              <MDBNavItem>
+                <MDBNavLink to={Endpoint.Annotate}>Annotate</MDBNavLink>
+              </MDBNavItem>
+            </MDBNavbarNav>
+          </MDBCollapse>
+        </MDBNavbar>
+      </Router>
+    )
+  }
 }
 
 export default Nav
