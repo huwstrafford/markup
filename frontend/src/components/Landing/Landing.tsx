@@ -14,7 +14,7 @@ function Landing() {
     <MDBJumbotron className="text-center">
       <MDBCardBody>
         <MDBCardTitle className="h2">
-          Rapid <span className="annotation primary-color">Annotation</span> using <span className="annotation primary-color">Active Learning</span>
+        Rapid Annotation using Active Learning
         </MDBCardTitle>
         <br/>
         <MDBCardText>
@@ -26,7 +26,7 @@ function Landing() {
             Annotate
           </MDBBtn>
           <MDBBtn href={Endpoint.Demo} className="waves-effect font-weight-bold primary-color-border" outline>
-            Try Demo
+            Try it out
           </MDBBtn>
         </div>
       </MDBCardBody>

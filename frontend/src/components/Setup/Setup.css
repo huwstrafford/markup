@@ -1,3 +1,19 @@
 .setup-form {
     margin: 10% 20%;
 }
+
+.required-field {
+    color: red;
+    font-weight: bold;
+}
+
+.field-header {
+    font-weight: bold;
+    /* text-transform: uppercase; */
+    margin: 5px;
+    color: #333;
+}
+
+.submit-btn {
+    font-weight: bold;
+}

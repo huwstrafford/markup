@@ -1,18 +1,23 @@
-import { MDBContainer, MDBBtn, MDBBadge } from "mdbreact"
+import { MDBContainer, MDBBtn, MDBTooltip, MDBIcon } from "mdbreact"
 
+import FileInput from "@markup/components/Setup/UserInput/FileInput"
 import "@markup/components/Setup/Setup.css"
-import React from "react"
 
 
 function Setup() {
   return (
     <MDBContainer>
       <form className="setup-form">
-        <p className="h4 text-center mb-4">Prepare your annotation session</p>
+        <p className="h3 text-center mb-4 font-weight-bold">Setup session</p>
         <br/>
 
         <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
-          Quantity<MDBBadge color="danger" className="ml-2">R</MDBBadge>
+          <span className="required-field">*</span>
+          <span className="field-header">Quantity</span>
+          <MDBTooltip domElement tag="span" placement="right">
+            <span><MDBIcon far icon="question-circle"/></span>
+            <span>The number of documents you intend to annotate.</span>
+          </MDBTooltip>
         </label>
         <div>
           <select className="browser-default custom-select">
@@ -23,49 +28,48 @@ function Setup() {
         <br />
 
         <label htmlFor="defaultFormRegisterEmailEx" className="grey-text">
-          Document to annotate<MDBBadge color="danger" className="ml-2">R</MDBBadge>
+          <span className="required-field">*</span>
+          <span className="field-header">Document to annotate</span>
+          <MDBTooltip domElement tag="span" placement="right">
+            <span><MDBIcon far icon="question-circle"/></span>
+            <span>The document you intend to annotate (must be .txt file).</span>
+          </MDBTooltip>
         </label>
-        <input type="email" id="defaultFormRegisterEmailEx" className="form-control" />
+        <FileInput />
         <br />
 
         <label htmlFor="defaultFormRegisterConfirmEx" className="grey-text">
-          Configuration file<MDBBadge color="danger" className="ml-2">R</MDBBadge>
+          <span className="required-field">*</span>
+          <span className="field-header">Configuration file</span>
+          <MDBTooltip domElement tag="span" placement="right">
+            <span><MDBIcon far icon="question-circle"/></span>
+            <span>The configuration file that defines available entities and attributes (must be .conf file).</span>
+          </MDBTooltip>
         </label>
-        <input type="email" id="defaultFormRegisterConfirmEx" className="form-control" />
+        <FileInput />
         <br />
 
         <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-          Existing annotations<MDBBadge color="success" className="ml-2">O</MDBBadge>
+          <span className="field-header">Existing annotations</span>
+          <MDBTooltip domElement tag="span" placement="right">
+            <span><MDBIcon far icon="question-circle"/></span>
+            <span>The number of documents you intend to annotate.</span>
+          </MDBTooltip>
         </label>
-        <input type="password" id="defaultFormRegisterPasswordEx" className="form-control" />
+        <FileInput />
         <br />
 
         <label htmlFor="defaultFormRegisterPasswordEx" className="grey-text">
-          Ontology<MDBBadge color="success" className="ml-2">O</MDBBadge>
+          <span className="field-header">Ontology</span>
+          <MDBTooltip domElement tag="span" placement="right">
+            <span><MDBIcon far icon="question-circle"/></span>
+            <span>The number of documents you intend to annotate.</span>
+          </MDBTooltip>
         </label>
-        <input type="password" id="defaultFormRegisterPasswordEx" className="form-control" />
-
-        {/* <div className="input-group">
-            <div className="input-group-prepend">
-              <span className="input-group-text" id="inputGroupFileAddon01">
-                Upload
-              </span>
-            </div>
-            <div className="custom-file">
-              <input
-                type="file"
-                className="custom-file-input"
-                id="inputGroupFile01"
-                aria-describedby="inputGroupFileAddon01"
-              />
-              <label className="custom-file-label" htmlFor="inputGroupFile01">
-                Choose file
-              </label>
-            </div>
-          </div> */}
+        <FileInput />
 
         <div className="text-center mt-4">
-          <MDBBtn color="indigo" type="submit">
+          <MDBBtn className="primary-color submit-btn" type="submit">
             Start Annotating!
           </MDBBtn>
         </div>
