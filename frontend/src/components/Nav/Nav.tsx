@@ -11,7 +11,7 @@ import {
 } from 'mdbreact'
 
 import '@markup/components/Nav/Nav.css'
-import Endpoint from '@markup/helpers/endpoint'
+import Endpoint from '@markup/helpers/Endpoint'
 
 class Nav extends Component {
   state = { isOpen: false }
@@ -23,9 +23,11 @@ class Nav extends Component {
   render() {
     return (
       <Router>
-        <MDBNavbar color="indigo" dark expand="md" className="navbar-custom">
+        <MDBNavbar dark expand="md" className="navbar-custom primary-color">
           <MDBNavbarBrand>
-            <strong className="white-text">Markup</strong>
+            <MDBNavLink to={Endpoint.Home}>
+              <strong className="white-text">Markup</strong>
+            </MDBNavLink>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.toggleCollapse} />
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>

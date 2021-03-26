@@ -1,7 +1,7 @@
 import { Redirect } from "react-router"
 
 import "@markup/components/Annotate/Annotate.css"
-import Endpoint from "@markup/helpers/endpoint"
+import Endpoint from "@markup/helpers/Endpoint"
 
 function Annotate() {
   if (localStorage.getItem('isSetup') != null) {

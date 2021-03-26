@@ -2,3 +2,9 @@
     margin-top: 10%;
     box-shadow: none;
 }
+
+.annotation {
+    color: white;
+    border-radius: 2px;
+    padding: 0.25%;
+}
