@@ -34,7 +34,7 @@ class Nav extends Component {
                 <MDBNavLink to={Endpoint.Documentation}>Docs</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to={Endpoint.Repository}>GitHub</MDBNavLink>
+                <MDBNavLink to={Endpoint.Repository} target="_blank">GitHub</MDBNavLink>
               </MDBNavItem>
               <MDBNavItem>
                 <MDBNavLink to={Endpoint.DataGenerator}>Generator</MDBNavLink>
