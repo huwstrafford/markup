@@ -1,18 +1,13 @@
 import { Component } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import {
+  MDBCollapse,
   MDBNavbar,
   MDBNavbarBrand,
   MDBNavbarNav,
+  MDBNavbarToggler,
   MDBNavItem,
   MDBNavLink,
-  MDBNavbarToggler,
-  MDBCollapse,
-  MDBFormInline,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
 } from 'mdbreact'
 
 import '@markup/components/Nav/Nav.css'

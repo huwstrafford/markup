@@ -1,11 +1,4 @@
-.landing {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.tagline {
-    color: white;
-    margin-bottom: 125px;
+.jumbotron {
+    margin-top: 10%;
+    box-shadow: none;
 }

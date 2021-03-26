@@ -5,7 +5,6 @@ import {
 } from "react-router-dom"
 
 import Nav from "@markup/components/Nav/Nav"
-import Footer from "@markup/components/Footer/Footer"
 import Landing from "@markup/components/Landing/Landing"
 import Docs from "@markup/components/Docs/Docs"
 import Generator from "@markup/components/Generator/Generator"
@@ -33,8 +32,6 @@ function App() {
           </Route>
         </Switch>
       </Router>
-
-      <Footer/>
     </>
   )
 }

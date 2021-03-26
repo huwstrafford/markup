@@ -1,16 +1,36 @@
+import {
+  MDBBtn,
+  MDBCardBody,
+  MDBCardText,
+  MDBCardTitle, MDBJumbotron
+} from "mdbreact"
+
+import Endpoint from "@markup/helpers/endpoint"
 import "@markup/components/Landing/Landing.css"
 
+
 function Landing() {
-  return (
-    <main>
-      <div className="landing">
-        <h2 className="tagline">Rapid Annotation, Powered by Active Learning</h2>
-        <div>
-          <button>Annotate</button>
-          <button>Try demo</button>
+  return (    
+    <MDBJumbotron className="text-center">
+      <MDBCardBody>
+        <MDBCardTitle className="h2">
+          Rapid Annotation, Powered by Active Learning
+        </MDBCardTitle>
+        <br/>
+        <MDBCardText>
+          Turn unstructed text documents into structured knowledge systems for ML and NLP
+        </MDBCardText>
+        <br/>
+        <div className="pt-2">
+          <MDBBtn href={Endpoint.Annotate} color="indigo" className="waves-effect">
+            Annotate
+          </MDBBtn>
+          <MDBBtn href={Endpoint.Demo} color="indigo" className="waves-effect" outline>
+            Try Demo
+          </MDBBtn>
         </div>
-      </div>
-    </main>
+      </MDBCardBody>
+    </MDBJumbotron>
   )
 }
 
