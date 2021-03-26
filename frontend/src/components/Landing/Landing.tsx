@@ -22,7 +22,7 @@ function Landing() {
         </MDBCardText>
         <br/>
         <div className="pt-2">
-          <MDBBtn href={Endpoint.Annotate} color="indigo" className="waves-effect">
+          <MDBBtn href={Endpoint.Setup} color="indigo" className="waves-effect">
             Annotate
           </MDBBtn>
           <MDBBtn href={Endpoint.Demo} color="indigo" className="waves-effect" outline>
