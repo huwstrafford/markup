@@ -1,5 +1,9 @@
-.setup-form {
-    margin: 10% 20%;
+.setup-row {
+    margin: 5% 0;
+}
+
+.setup-column {
+    margin: 5% 2%;
 }
 
 .required-field {
@@ -8,8 +12,6 @@
 }
 
 .field-header {
-    font-weight: bold;
-    /* text-transform: uppercase; */
     margin: 5px;
     color: #333;
 }
