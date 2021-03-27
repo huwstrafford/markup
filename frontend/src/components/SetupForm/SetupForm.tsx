@@ -44,7 +44,7 @@ function SetupForm(this: any) {
 
             <div className="text-center mt-4">
               <MDBBtn className="primary-color submit-btn" type="submit">
-                Start Annotation Session
+                Start Session
               </MDBBtn>
             </div>
           </form>

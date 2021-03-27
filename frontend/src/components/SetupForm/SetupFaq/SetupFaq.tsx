@@ -19,7 +19,13 @@ function SetupFaq(this: any) {
 
         <h5>What annotation formats do I need to use?</h5>
         <p>
-          Markup only works with <a href="https://brat.nlplab.org/standoff.html">standoff format</a> at the moment.
+          Markup only works with <a href="https://brat.nlplab.org/standoff.html" target="_blank" rel="noreferrer">standoff format</a> at the moment.
+        </p>
+        <br/>
+
+        <h5>Can you help me get setup?</h5>
+        <p>
+          Contact me (<a href="mailto:samuel@getmarkup.com">sam@getmarkup.com</a>) and I'll try my best! 
         </p>
       </>
     )
