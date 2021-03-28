@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { MDBContainer, MDBTooltip, MDBIcon, MDBBtn, MDBCol, MDBRow } from "mdbreact"
 
-import "@markup/components/SetupForm/SetupForm.css"
-import FileFormField from "@markup/components/SetupForm/FileFormField/FileFormField"
-import FolderFormField from "@markup/components/SetupForm/FolderFormField/FolderFormField"
-import SetupFaq from "@markup/components/SetupForm/SetupFaq/SetupFaq"
+import "@markup/components/Annotate/SetupForm/SetupForm.css"
+import FileFormField from "@markup/components/Annotate/SetupForm/FileFormField/FileFormField"
+import FolderFormField from "@markup/components/Annotate/SetupForm/FolderFormField/FolderFormField"
+import SetupFaq from "@markup/components/Annotate/SetupForm/SetupFaq/SetupFaq"
 
 
 enum DocumentQuantity {

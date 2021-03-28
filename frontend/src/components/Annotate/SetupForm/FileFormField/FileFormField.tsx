@@ -1,6 +1,6 @@
 import { MDBTooltip, MDBIcon } from "mdbreact"
 
-import FileInput from "@markup/components/SetupForm/FileFormField/FileInput"
+import FileInput from "@markup/components/Annotate/SetupForm/FileFormField/FileInput"
 
 
 function FileFormField() {

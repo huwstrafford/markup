@@ -1,6 +1,6 @@
 import { MDBIcon, MDBTooltip } from "mdbreact"
 
-import FolderInput from "@markup/components/SetupForm/FolderFormField/FolderInput"
+import FolderInput from "@markup/components/Annotate/SetupForm/FolderFormField/FolderInput"
 
 
 function FolderFormField() {

@@ -9,29 +9,29 @@ import Endpoint from "@markup/helpers/Endpoint"
 import Nav from "@markup/components/Nav/Nav"
 import Landing from "@markup/components/Landing/Landing"
 import Docs from "@markup/components/Docs/Docs"
-import DataGenerator from "@markup/components/DataGenerator/DataGenerator"
-import SetupForm from "@markup/components/SetupForm/SetupForm"
+import DataGenerator from "@markup/components/Tools/DataGenerator/DataGenerator"
+import SetupForm from "@markup/components/Annotate/SetupForm/SetupForm"
 import Annotate from "@markup/components/Annotate/Annotate"
 import PageNotFound from "@markup/components/Failure/PageNotFound/PageNotFound"
+import ConfigCreator from "../Tools/ConfigCreator/ConfigCreator"
 
 function App() {
   return (
-    <>
+    <Router>
       <Nav/>
 
-      <Router>
-        <Switch>
-          <Route path={Endpoint.Demo} exact component={Annotate} />
-          <Route path={Endpoint.Documentation} exact component={Docs} />
-          <Route path={Endpoint.DataGenerator} exact component={DataGenerator} />
-          <Route path={Endpoint.SetupForm} exact component={SetupForm} />
-          <Route path={Endpoint.Annotate} exact component={Annotate} />
-          <Route path={Endpoint.Home} exact component={Landing} />
-          <Route path={Endpoint.PageNotFound} component={PageNotFound} />
-          <Redirect from={Endpoint.Any} to={Endpoint.PageNotFound} />
-        </Switch>
-      </Router>
-    </>
+      <Switch>
+        <Route path={Endpoint.Demo} exact component={Annotate} />
+        <Route path={Endpoint.Documentation} exact component={Docs} />
+        <Route path={Endpoint.DataGenerator} exact component={DataGenerator} />
+        <Route path={Endpoint.ConfigCreator} exact component={ConfigCreator} />
+        <Route path={Endpoint.SetupForm} exact component={SetupForm} />
+        <Route path={Endpoint.Annotate} exact component={Annotate} />
+        <Route path={Endpoint.Home} exact component={Landing} />
+        <Route path={Endpoint.PageNotFound} component={PageNotFound} />
+        <Redirect from={Endpoint.Any} to={Endpoint.PageNotFound} />
+      </Switch>
+    </Router>
   )
 }
 
