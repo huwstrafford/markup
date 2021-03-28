@@ -1,14 +1,18 @@
 function FileInput(props: any) {
   function storeSingleFile() {
-    const file = document.getElementById(props.id) as HTMLInputElement
+    const input = document.getElementById(props.id) as HTMLInputElement
 
-    if (file != null) {
-      const f = file.files
+    if (input != null && input.files != null) {
+      const file = input.files[0]
 
-      if (f != null) {
-        storeFile(f[0], 'configText');
-      }
+      updateInputField(file.name)
+      storeFile(file, props.storageName)
     }
+  }
+
+  function updateInputField(fileName: string) {
+    const label = document.getElementById(props.id + "-label") as HTMLLabelElement
+    label.innerText = fileName
   }
 
   function storeFile(file: Blob, storageName: string) {
@@ -23,8 +27,8 @@ function FileInput(props: any) {
   return (
     <div className="input-group">
         <div className="custom-file">
-            <input type="file" className="custom-file-input" id={props.id} onChange={storeSingleFile}/>
-            <label className="custom-file-label" htmlFor={props.id}>
+            <input type="file" className="custom-file-input" id={props.id} accept={props.accept} onChange={storeSingleFile}/>
+            <label className="custom-file-label" id={props.id + "-label"} htmlFor={props.id}>
                 Choose file
             </label>
         </div>
