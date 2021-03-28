@@ -1,4 +1,8 @@
 function ConfigPanel() {
+  const configText = localStorage.getItem("configText")
+
+  console.log(configText)
+
   return (
     <>
       <p className="config-value-row">

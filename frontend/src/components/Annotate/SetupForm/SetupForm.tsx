@@ -1,10 +1,16 @@
 import { useState } from "react"
-import { MDBContainer, MDBTooltip, MDBIcon, MDBBtn, MDBCol, MDBRow } from "mdbreact"
+import {
+  MDBContainer,
+  MDBBtn,
+  MDBCol,
+  MDBRow
+} from "mdbreact"
 
 import "@markup/components/Annotate/SetupForm/SetupForm.css"
 import FileFormField from "@markup/components/Annotate/SetupForm/FileFormField/FileFormField"
 import FolderFormField from "@markup/components/Annotate/SetupForm/FolderFormField/FolderFormField"
 import SetupFaq from "@markup/components/Annotate/SetupForm/SetupFaq/SetupFaq"
+import Tooltip from "@markup/components/Annotate/SetupForm/helpers/Tooltip"
 
 
 enum DocumentQuantity {
@@ -26,10 +32,7 @@ function SetupForm(this: any) {
             <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
               <span className="required-field">*</span>
               <span className="field-header">Quantity</span>
-              <MDBTooltip domElement tag="span" placement="right">
-                <span><MDBIcon far icon="question-circle"/></span>
-                <span>The number of documents you intend to annotate.</span>
-              </MDBTooltip>
+              <Tooltip message="The number of documents you intend to annotate."/>
             </label>
             <div>
               <select className="browser-default custom-select" onChange={event => setQuantity(event.target.value)}>
