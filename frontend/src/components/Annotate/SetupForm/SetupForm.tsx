@@ -1,16 +1,17 @@
-import { useState } from "react"
-import {
-  MDBContainer,
-  MDBBtn,
-  MDBCol,
-  MDBRow
-} from "mdbreact"
-
-import "@markup/components/Annotate/SetupForm/SetupForm.css"
 import FileFormField from "@markup/components/Annotate/SetupForm/FileFormField/FileFormField"
 import FolderFormField from "@markup/components/Annotate/SetupForm/FolderFormField/FolderFormField"
-import SetupFaq from "@markup/components/Annotate/SetupForm/SetupFaq/SetupFaq"
 import Tooltip from "@markup/components/Annotate/SetupForm/helpers/Tooltip"
+import SetupFaq from "@markup/components/Annotate/SetupForm/SetupFaq/SetupFaq"
+import "@markup/components/Annotate/SetupForm/SetupForm.css"
+import Endpoint from "@markup/helpers/Endpoint"
+import {
+  MDBBtn,
+  MDBCol, MDBContainer,
+
+
+  MDBRow
+} from "mdbreact"
+import { SyntheticEvent, useState } from "react"
 
 
 enum DocumentQuantity {
@@ -18,8 +19,15 @@ enum DocumentQuantity {
   Multiple = "multiple"
 }
 
+
 function SetupForm(this: any) {
   const [quantity, setQuantity] = useState<String>(DocumentQuantity.Single)
+
+  const startSession = (event: SyntheticEvent) => {
+    event.preventDefault()
+    localStorage.setItem("isSetup", "true")
+    window.location.href = Endpoint.Annotate
+  }
 
   return (
     <MDBContainer>
@@ -46,7 +54,7 @@ function SetupForm(this: any) {
             {quantity === DocumentQuantity.Multiple && <FolderFormField/>}
 
             <div className="text-center mt-4">
-              <MDBBtn className="primary-color submit-btn" type="submit">
+              <MDBBtn className="primary-color submit-btn" type="submit" onClick={(event: SyntheticEvent) => {startSession(event)}}>
                 Start Session
               </MDBBtn>
             </div>

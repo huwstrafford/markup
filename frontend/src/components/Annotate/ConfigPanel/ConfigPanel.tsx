@@ -1,7 +1,9 @@
-function ConfigPanel() {
+function ConfigPanel(props: any) {
   const configText = localStorage.getItem("configText")
 
-  console.log(configText)
+  if (configText == null || configText.trim() === "") {
+    props.setErrorMessage("You need to provide a valid config file. Read the docs for more info.")
+  }
 
   return (
     <>

@@ -5,12 +5,12 @@ function FileInput(props: any) {
     if (input != null && input.files != null) {
       const file = input.files[0]
 
-      updateInputField(file.name)
+      displayFileNameInField(file.name)
       storeFile(file, props.storageName)
     }
   }
 
-  function updateInputField(fileName: string) {
+  function displayFileNameInField(fileName: string) {
     const label = document.getElementById(props.id + "-label") as HTMLLabelElement
     label.innerText = fileName
   }
