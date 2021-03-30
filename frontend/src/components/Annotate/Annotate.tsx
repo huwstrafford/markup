@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { MDBAlert, MDBCol, MDBContainer, MDBRow } from "mdbreact"
 
 import AnnotationPanel from "@markup/components/Annotate/AnnotationPanel/AnnotationPanel"
@@ -5,14 +6,13 @@ import ConfigPanel from "@markup/components/Annotate/ConfigPanel/ConfigPanel"
 import DocumentPanel from "@markup/components/Annotate/DocumentPanel/DocumentPanel"
 import Endpoint from "@markup/helpers/Endpoint"
 import "@markup/components/Annotate/Annotate.css"
-import React, { useState } from "react"
 
 
 function Annotate() {
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
 
-  if (localStorage.getItem('isSetup') !== "true") {
+  if (localStorage.getItem("isSetup") !== "true") {
     window.location.href = Endpoint.SetupForm
   }
 
@@ -38,11 +38,19 @@ function Annotate() {
               setSuccessMessage={setSuccessMessage}
             />
           </MDBCol>
+
           <MDBCol md="6">
-            <DocumentPanel />
+            <DocumentPanel
+              setErrorMessage={setErrorMessage}
+              setSuccessMessage={setSuccessMessage}
+            />
           </MDBCol>
+
           <MDBCol md="4">
-            <AnnotationPanel />          
+            <AnnotationPanel
+              setErrorMessage={setErrorMessage}
+              setSuccessMessage={setSuccessMessage}
+            />
           </MDBCol>
         </MDBRow>
       </MDBContainer>

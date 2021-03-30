@@ -1,11 +1,14 @@
-function AnnotationPanel() {
+function AnnotationPanel(props: any) {
+  const annotationText = localStorage.getItem("annotationText0")
+
+  if (annotationText == null || annotationText.trim() === "") {
+    props.setErrorMessage("You need to provide valid annotations. Read the docs for more info.")
+  }
+
   return (
-    <>
-      <p>Annotations</p>
-      <p>a</p>
-      <p>b</p>
-      <p>c</p>
-    </>
+    <div>
+      {annotationText}
+    </div>
   )
 }
 

@@ -1,24 +1,17 @@
+import { MDBBtn, MDBCol, MDBContainer, MDBRow } from "mdbreact"
+import { SyntheticEvent, useState } from "react"
+
 import FileFormField from "@markup/components/Annotate/SetupForm/FileFormField/FileFormField"
 import FolderFormField from "@markup/components/Annotate/SetupForm/FolderFormField/FolderFormField"
 import Tooltip from "@markup/components/Annotate/SetupForm/helpers/Tooltip"
 import SetupFaq from "@markup/components/Annotate/SetupForm/SetupFaq/SetupFaq"
-import "@markup/components/Annotate/SetupForm/SetupForm.css"
 import Endpoint from "@markup/helpers/Endpoint"
-import {
-  MDBBtn,
-  MDBCol, MDBContainer,
-
-
-  MDBRow
-} from "mdbreact"
-import { SyntheticEvent, useState } from "react"
-
+import "@markup/components/Annotate/SetupForm/SetupForm.css"
 
 enum DocumentQuantity {
   Single = "single",
   Multiple = "multiple"
 }
-
 
 function SetupForm(this: any) {
   const [quantity, setQuantity] = useState<String>(DocumentQuantity.Single)
