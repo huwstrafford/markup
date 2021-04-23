@@ -32,7 +32,7 @@ function Annotate() {
       
       <MDBContainer className="annotation-container">
         <MDBRow>
-          <MDBCol md="2">
+          <MDBCol md="3">
             <ConfigPanel
               setErrorMessage={setErrorMessage}
               setSuccessMessage={setSuccessMessage}
@@ -46,7 +46,7 @@ function Annotate() {
             />
           </MDBCol>
 
-          <MDBCol md="4">
+          <MDBCol md="3">
             <AnnotationPanel
               setErrorMessage={setErrorMessage}
               setSuccessMessage={setSuccessMessage}

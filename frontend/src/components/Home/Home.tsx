@@ -13,19 +13,19 @@ function Home() {
   return (    
     <MDBJumbotron className="text-center">
       <MDBCardBody>
-        <MDBCardTitle className="h2">
+        <MDBCardTitle className="h2 custom-home-title">
         Rapid Annotation, Powered by Active Learning
         </MDBCardTitle>
         <br/>
-        <MDBCardText>
+        <MDBCardText className="custom-home-card">
           Turn unstructed text documents into structured<br/> knowledge systems for ML and NLP
         </MDBCardText>
         <br/>
         <div className="pt-2">
-          <MDBBtn href={Endpoint.Documentation} className="waves-effect font-weight-bold primary-color-border custom-home-button" outline>
+          <MDBBtn href={Endpoint.Documentation} className="waves-effect font-weight-bold custom-home-button">
             Docs
           </MDBBtn>
-          <MDBBtn href={Endpoint.SetupForm} className="waves-effect font-weight-bold primary-color custom-home-button">
+          <MDBBtn href={Endpoint.SetupForm} className="waves-effect font-weight-bold custom-home-button">
             Annotate
           </MDBBtn>
           <p>

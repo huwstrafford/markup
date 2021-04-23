@@ -4,7 +4,16 @@
     background-color: transparent;
 }
 
+.custom-home-title {
+    color: white;
+}
+
+.custom-home-card {
+    color: white;
+}
+
 .custom-home-button {
     min-width: 135px;
     margin-bottom: 1%;
+    background-color: #1B1B1B !important;
 }

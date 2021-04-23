@@ -1,5 +1,19 @@
-.xyz {
-    background-color: rgb(72, 209, 204);
-    margin-left: 0px;
+.config-value-row {
+    margin: 0px;
+}
+
+.config-label {
+    border-radius: 2px;
+    padding: 4px 9px;
+    margin: 5px;
+    white-space: nowrap;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    box-shadow: 1.5px 1.5px #1B1B1B;
     transition: margin 300ms ease 0s;
+}
+
+input {
+    visibility: hidden;
 }
