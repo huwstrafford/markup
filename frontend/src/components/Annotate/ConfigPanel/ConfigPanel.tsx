@@ -1,5 +1,7 @@
-import Endpoint from "@markup/helpers/Endpoint"
 import { Redirect } from "react-router"
+
+import Endpoint from "@markup/helpers/Endpoint"
+import "./ConfigPanel.css"
 
 function ConfigPanel(props: any) {
   const configText = localStorage.getItem("configText")

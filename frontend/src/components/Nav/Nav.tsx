@@ -13,8 +13,8 @@ import {
   MDBNavLink,
 } from 'mdbreact'
 
-import '@markup/components/Nav/Nav.css'
 import Endpoint from '@markup/helpers/Endpoint'
+import './Nav.css'
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false)

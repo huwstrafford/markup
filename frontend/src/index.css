@@ -14,15 +14,16 @@ code {
 }
 
 .primary-color {
-    background-color: #546eff !important;
+    /* 546eff */
+    background-color: black !important;
 }
 
 .primary-color-border {
-    border-color: #546eff !important;
-    color: #546eff !important;
+    border-color: black !important;
+    color: black !important;
 }
 
 .primary-color-border:hover {
-    border-color: #546eff !important;
-    color: #546eff !important;
+    border-color: black !important;
+    color: black !important;
 }

@@ -1,0 +1,10 @@
+.jumbotron {
+    margin-top: 12.5%;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.custom-home-button {
+    min-width: 135px;
+    margin-bottom: 1%;
+}

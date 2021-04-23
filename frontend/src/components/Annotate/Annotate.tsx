@@ -5,7 +5,7 @@ import AnnotationPanel from "@markup/components/Annotate/AnnotationPanel/Annotat
 import ConfigPanel from "@markup/components/Annotate/ConfigPanel/ConfigPanel"
 import DocumentPanel from "@markup/components/Annotate/DocumentPanel/DocumentPanel"
 import Endpoint from "@markup/helpers/Endpoint"
-import "@markup/components/Annotate/Annotate.css"
+import "./Annotate.css"
 
 
 function Annotate() {

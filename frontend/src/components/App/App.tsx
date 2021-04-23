@@ -7,27 +7,27 @@ import {
 
 import Endpoint from "@markup/helpers/Endpoint"
 import Nav from "@markup/components/Nav/Nav"
-import Landing from "@markup/components/Landing/Landing"
+import Home from "@markup/components/Home/Home"
 import Docs from "@markup/components/Docs/Docs"
 import DataGenerator from "@markup/components/Tools/DataGenerator/DataGenerator"
 import SetupForm from "@markup/components/Annotate/SetupForm/SetupForm"
 import Annotate from "@markup/components/Annotate/Annotate"
 import PageNotFound from "@markup/components/Failure/PageNotFound/PageNotFound"
-import ConfigCreator from "../Tools/ConfigCreator/ConfigCreator"
+import ConfigCreator from "@markup/components/Tools/ConfigCreator/ConfigCreator"
+import "./App.css"
 
 function App() {
   return (
     <Router>
       <Nav/>
-
       <Switch>
-        <Route path={Endpoint.Demo} exact component={Annotate} />
-        <Route path={Endpoint.Documentation} exact component={Docs} />
-        <Route path={Endpoint.DataGenerator} exact component={DataGenerator} />
-        <Route path={Endpoint.ConfigCreator} exact component={ConfigCreator} />
-        <Route path={Endpoint.SetupForm} exact component={SetupForm} />
-        <Route path={Endpoint.Annotate} exact component={Annotate} />
-        <Route path={Endpoint.Home} exact component={Landing} />
+        <Route exact path={Endpoint.Demo} component={Annotate} />
+        <Route exact path={Endpoint.Documentation} component={Docs} />
+        <Route exact path={Endpoint.DataGenerator} component={DataGenerator} />
+        <Route exact path={Endpoint.ConfigCreator} component={ConfigCreator} />
+        <Route exact path={Endpoint.SetupForm} component={SetupForm} />
+        <Route exact path={Endpoint.Annotate} component={Annotate} />
+        <Route exact path={Endpoint.Home} component={Home} />
         <Route path={Endpoint.PageNotFound} component={PageNotFound} />
         <Redirect from={Endpoint.Any} to={Endpoint.PageNotFound} />
       </Switch>

@@ -1,4 +1,4 @@
-import "@markup/components/Tools/DataGenerator/DataGenerator.css"
+import "./DataGenerator.css"
 
 function DataGenerator() {
   return (

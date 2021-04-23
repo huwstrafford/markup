@@ -1,4 +1,4 @@
-import "@markup/components/Docs/Docs.css"
+import "./Docs.css"
 
 function Docs() {
   return (

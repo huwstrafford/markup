@@ -6,15 +6,15 @@ import {
 } from "mdbreact"
 
 import Endpoint from "@markup/helpers/Endpoint"
-import "@markup/components/Landing/Landing.css"
+import "./Home.css"
 
 
-function Landing() {
+function Home() {
   return (    
     <MDBJumbotron className="text-center">
       <MDBCardBody>
         <MDBCardTitle className="h2">
-        Rapid Annotation using Active Learning
+        Rapid Annotation, Powered by Active Learning
         </MDBCardTitle>
         <br/>
         <MDBCardText>
@@ -22,16 +22,19 @@ function Landing() {
         </MDBCardText>
         <br/>
         <div className="pt-2">
-          <MDBBtn href={Endpoint.SetupForm} className="waves-effect font-weight-bold primary-color">
+          <MDBBtn href={Endpoint.Documentation} className="waves-effect font-weight-bold primary-color-border custom-home-button" outline>
+            Docs
+          </MDBBtn>
+          <MDBBtn href={Endpoint.SetupForm} className="waves-effect font-weight-bold primary-color custom-home-button">
             Annotate
           </MDBBtn>
-          <MDBBtn href={Endpoint.Demo} className="waves-effect font-weight-bold primary-color-border" outline>
-            Try it out
-          </MDBBtn>
+          <p>
+            <a href={Endpoint.Demo}>...or try a demo</a>
+          </p>
         </div>
       </MDBCardBody>
     </MDBJumbotron>
   )
 }
 
-export default Landing
+export default Home

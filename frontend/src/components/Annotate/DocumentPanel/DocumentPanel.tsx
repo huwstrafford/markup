@@ -1,3 +1,5 @@
+import "./DocumentPanel.css"
+
 function DocumentPanel(props: any) {
   const documentText = localStorage.getItem("documentText0")
 
@@ -6,7 +8,7 @@ function DocumentPanel(props: any) {
   }
 
   return (
-    <div>
+    <div className="document-text">
       {documentText}
     </div>
   )
