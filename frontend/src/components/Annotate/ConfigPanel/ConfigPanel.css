@@ -1,23 +1,26 @@
+/* input {
+    visibility: hidden;
+} */
+
 .config-value-row {
     margin: 0px;
 }
 
 .config-label {
-    border-radius: 2px;
-    padding: 4px 9px;
-    margin-left: 0%;
+    border-radius: 4px;
+    padding: 3px 5px;
+    color: #1A1E24;
     white-space: nowrap;
     cursor: pointer;
     text-align: center;
     border: none;
-    box-shadow: 1.5px 1.5px #1B1B1B;
-    transition: margin 300ms ease 0s;
-}
-
-input {
-    visibility: hidden;
+    box-shadow: 0px 0.25px #1a1e24;
 }
 
 .config-label-inactive {
     filter: brightness(66%);
+}
+
+.inactive-attribute {
+    display: none;
 }

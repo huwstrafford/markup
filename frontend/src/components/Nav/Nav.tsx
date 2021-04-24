@@ -27,7 +27,7 @@ function Nav() {
       <MDBNavbar dark expand="md" className="navbar-custom primary-color">
         <MDBNavbarBrand>
           <MDBNavLink to={Endpoint.Home}>
-            <strong className="white-text font-weight-bold">Markup</strong>
+            <strong className="white-text font-weight-bold custom-navbar-logo">markup</strong>
           </MDBNavLink>
         </MDBNavbarBrand>
         <MDBNavbarToggler onClick={toggleCollapse} />

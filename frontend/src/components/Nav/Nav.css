@@ -1,7 +1,15 @@
+.custom-navbar-logo {
+    font-size: 35px;
+}
+
 .navbar-custom {
     padding: 1% 10%;
 }
 
 .nav-item-custom {
     margin-right: 5%;
+}
+
+.navbar {
+    box-shadow: none;
 }

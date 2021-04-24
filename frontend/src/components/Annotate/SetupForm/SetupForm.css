@@ -13,9 +13,11 @@
 
 .field-header {
     margin: 5px;
-    color: #333;
+    color: white;
 }
 
 .submit-btn {
     font-weight: bold;
+    background-color: #33FFB5 !important;
+    color: black;
 }

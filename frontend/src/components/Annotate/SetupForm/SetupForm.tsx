@@ -47,7 +47,7 @@ function SetupForm(this: any) {
             {quantity === DocumentQuantity.Multiple && <FolderFormField/>}
 
             <div className="text-center mt-4">
-              <MDBBtn className="primary-color submit-btn" type="submit" onClick={(event: SyntheticEvent) => {startSession(event)}}>
+              <MDBBtn className="submit-btn" type="submit" onClick={(event: SyntheticEvent) => {startSession(event)}}>
                 Start Session
               </MDBBtn>
             </div>
