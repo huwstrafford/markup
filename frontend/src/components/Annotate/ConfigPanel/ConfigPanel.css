@@ -5,7 +5,7 @@
 .config-label {
     border-radius: 2px;
     padding: 4px 9px;
-    margin: 5px;
+    margin-left: 0%;
     white-space: nowrap;
     cursor: pointer;
     text-align: center;
@@ -16,4 +16,8 @@
 
 input {
     visibility: hidden;
+}
+
+.config-label-inactive {
+    filter: brightness(66%);
 }
