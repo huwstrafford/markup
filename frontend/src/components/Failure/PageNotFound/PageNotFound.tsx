@@ -3,7 +3,7 @@ import { MDBLink } from "mdbreact"
 import Endpoint from "@markup/helpers/Endpoint"
 import "./PageNotFound.css"
 
-function PageNotFound() {
+function PageNotFound(): JSX.Element {
   return (
   	<div className="container-fluid">
   		<div className="col-md-6 offset-md-3 text-center mt-5 pt-5">

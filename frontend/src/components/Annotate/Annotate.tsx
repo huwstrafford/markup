@@ -8,7 +8,7 @@ import Endpoint from "@markup/helpers/Endpoint"
 import "./Annotate.css"
 
 
-function Annotate() {
+function Annotate(): JSX.Element {
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
 

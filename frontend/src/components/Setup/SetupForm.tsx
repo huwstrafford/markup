@@ -1,19 +1,20 @@
 import { MDBBtn, MDBCol, MDBContainer, MDBRow } from "mdbreact"
 import { SyntheticEvent, useState } from "react"
 
-import FileFormField from "@markup/components/Annotate/SetupForm/FileFormField/FileFormField"
-import FolderFormField from "@markup/components/Annotate/SetupForm/FolderFormField/FolderFormField"
-import Tooltip from "@markup/components/Annotate/SetupForm/helpers/Tooltip"
-import SetupFaq from "@markup/components/Annotate/SetupForm/SetupFaq/SetupFaq"
 import Endpoint from "@markup/helpers/Endpoint"
-import "@markup/components/Annotate/SetupForm/SetupForm.css"
+import FileForm from "@markup/components/Setup/FileForm/FileForm"
+import FolderForm from "@markup/components/Setup/FolderForm/FolderForm"
+import Title from "@markup/components/Setup/helpers/Title"
+import Tooltip from "@markup/components/Setup/helpers/Tooltip"
+import SetupFaq from "@markup/components/Setup/SetupFaq/SetupFaq"
+import "./SetupForm.css"
 
 enum DocumentQuantity {
   Single = "single",
   Multiple = "multiple"
 }
 
-function SetupForm(this: any) {
+function SetupForm(): JSX.Element {
   const [quantity, setQuantity] = useState<String>(DocumentQuantity.Single)
 
   const startSession = (event: SyntheticEvent) => {
@@ -27,8 +28,7 @@ function SetupForm(this: any) {
       <MDBRow className="setup-row">
         <MDBCol md="6" className="setup-column">
           <form >
-            <h4>Setup</h4>
-            <hr></hr>
+            <Title message="Setup"/>
 
             <label htmlFor="defaultFormRegisterNameEx" className="grey-text">
               <span className="required-field">*</span>
@@ -43,8 +43,8 @@ function SetupForm(this: any) {
             </div>
             <br />
 
-            {quantity === DocumentQuantity.Single && <FileFormField/>}
-            {quantity === DocumentQuantity.Multiple && <FolderFormField/>}
+            {quantity === DocumentQuantity.Single && <FileForm/>}
+            {quantity === DocumentQuantity.Multiple && <FolderForm/>}
 
             <div className="text-center mt-4">
               <MDBBtn className="submit-btn" type="submit" onClick={(event: SyntheticEvent) => {startSession(event)}}>

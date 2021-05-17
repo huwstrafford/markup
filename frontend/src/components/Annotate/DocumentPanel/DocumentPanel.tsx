@@ -1,6 +1,6 @@
 import "./DocumentPanel.css"
 
-function DocumentPanel(props: any) {
+function DocumentPanel(props: any): JSX.Element {
   const documentText = localStorage.getItem("documentText0")
 
   if (documentText == null || documentText.trim() === "") {

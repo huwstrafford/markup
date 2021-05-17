@@ -1,6 +1,6 @@
 import "./ConfigCreator.css"
 
-function ConfigCreator() {
+function ConfigCreator(): JSX.Element {
   return (
     <div className="container">
       <div className="config-panel">

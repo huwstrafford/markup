@@ -1,8 +1,8 @@
-import FileInput from "@markup/components/Annotate/SetupForm/FileFormField/FileInput"
-import Tooltip from "@markup/components/Annotate/SetupForm/helpers/Tooltip"
+import FileInput from "@markup/components/Setup/FileForm/FileInput"
+import Tooltip from "@markup/components/Setup/helpers/Tooltip"
 
 
-function FileFormField() {
+function FileForm(): JSX.Element {
   const generateId = (): string => {
     return Math.random().toString(36).substring(7)
   }
@@ -59,7 +59,7 @@ function FileFormField() {
   )
 }
 
-function Header(props: any) {
+function Header(props: any): JSX.Element {
   return (
     <label className="grey-text">
       {props.required && <span className="required-field">*</span>}
@@ -69,4 +69,4 @@ function Header(props: any) {
   )
 }
 
-export default FileFormField
+export default FileForm

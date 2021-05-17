@@ -1,6 +1,6 @@
 import "./AnnotationPanel.css"
 
-function AnnotationPanel(props: any) {
+function AnnotationPanel(props: any): JSX.Element {
   const annotationText = localStorage.getItem("annotationText0")
 
   return (

@@ -1,5 +1,4 @@
-import { MDBInput } from "mdbreact"
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 import "./ConfigPanel.css"
 
@@ -21,7 +20,7 @@ const ENTITY_COLOUR = ["#e6194b", "#3cb44b", "#ffe119", "#4363d8", "#f58231", "#
 const DEFAULT_ENTITY = [] as Entity[]
 const DEFAULT_ATTRIBUTE = [] as Attribute[]
 
-function ConfigPanel(props: any) {
+function ConfigPanel(props: any): JSX.Element {
   const configText = localStorage.getItem("configText")
   const [entities, setEntities] = useState(DEFAULT_ENTITY)
   const [attributes, setAttributes] = useState(DEFAULT_ATTRIBUTE)

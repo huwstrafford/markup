@@ -5,7 +5,7 @@ body {
     font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* background-color: #F1F1F1; */
+    color: white;
     background-color: #141414;
 }
 
@@ -15,16 +15,13 @@ code {
 }
 
 .primary-color {
-    /* background-color: #F1F1F1 !important; */
     background-color: #141414 !important;
 }
 
 .primary-color-border {
-    /* border-color: #F1F1F1 !important; */
     border-color: #141414 !important;
 }
 
 .primary-color-border:hover {
-    /* border-color: #F1F1F1 !important; */
     border-color: #141414 !important;
 }
