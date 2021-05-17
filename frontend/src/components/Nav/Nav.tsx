@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   MDBCollapse,
   MDBDropdown,
@@ -15,6 +15,7 @@ import {
 
 import Endpoint from '@markup/helpers/Endpoint'
 import './Nav.css'
+import GitHubButton from 'react-github-btn'
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false)
@@ -52,6 +53,16 @@ function Nav() {
             </MDBNavItem>
             <MDBNavItem className="nav-item-custom">
               <MDBNavLink to={Endpoint.SetupForm}>Annotate</MDBNavLink>
+            </MDBNavItem>
+            <MDBNavItem className="nav-item-custom">
+              <GitHubButton
+                href="https://github.com/samueldobbie/markup"
+                data-size="large"
+                data-show-count="true"
+                aria-label="Star samueldobbie/markup on GitHub"
+              >
+                Star
+              </GitHubButton>
             </MDBNavItem>
           </MDBNavbarNav>
         </MDBCollapse>
