@@ -32,14 +32,14 @@ function Annotate(): JSX.Element {
       
       <MDBContainer className="annotation-container">
         <MDBRow>
-          <MDBCol md="2">
+          <MDBCol md="3">
             <ConfigPanel
               setErrorMessage={setErrorMessage}
               setSuccessMessage={setSuccessMessage}
             />
           </MDBCol>
 
-          <MDBCol md="6">
+          <MDBCol md="5">
             <DocumentPanel
               setErrorMessage={setErrorMessage}
               setSuccessMessage={setSuccessMessage}

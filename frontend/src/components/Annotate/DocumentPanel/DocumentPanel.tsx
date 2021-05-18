@@ -1,3 +1,5 @@
+import Scrollbars from "react-custom-scrollbars-2"
+
 import "./DocumentPanel.css"
 
 function DocumentPanel(props: any): JSX.Element {
@@ -8,8 +10,12 @@ function DocumentPanel(props: any): JSX.Element {
   }
 
   return (
-    <div className="document-text">
-      {documentText}
+    <div className="panel">
+      <Scrollbars autoHide>
+        <div className="panel-content document-text">
+          {documentText}
+        </div>
+      </Scrollbars>
     </div>
   )
 }

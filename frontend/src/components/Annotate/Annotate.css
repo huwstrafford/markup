@@ -1,7 +1,18 @@
 .annotation-container {
-    padding: 5%;
+    padding: 2.5% 5%;
     max-width: 100vw !important;
     font-size: 1.2em;
-    /* height: 80vh;
-    overflow-y: hidden; */
+    height: 80vh;
+    overflow-y: hidden;
+}
+
+.panel {
+    background-color: rgba(66, 66, 66, 0.781);
+    padding: 25px;
+    border-radius: 5px;
+    height: 70vh;
+}
+
+.panel-content {
+    margin-right: 10%;
 }

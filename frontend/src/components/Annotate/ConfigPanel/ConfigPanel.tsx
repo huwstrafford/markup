@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import Scrollbars from "react-custom-scrollbars-2"
 import {
   ATTRIBUTE_CATEGORY,
   DEFAULT_ATTRIBUTE,
@@ -39,24 +40,28 @@ function ConfigPanel(props: any): JSX.Element {
   }, [props, categories, rendered])
 
   return (
-    <div className="config-panel">
-      <EntityConfig
-        entities={entities}
-        activeEntity={activeEntity}
-        setActiveEntity={setActiveEntity}
-      />
-      <br/>
+    <div className="panel">
+      <Scrollbars autoHide>
+        <div className="panel-content">
+          <EntityConfig
+            entities={entities}
+            activeEntity={activeEntity}
+            setActiveEntity={setActiveEntity}
+          />
+          <br/>
 
-      <AttributeConfig
-        attributes={attributes}
-        activeEntity={activeEntity}
-      />
-      <br/>
+          <AttributeConfig
+            attributes={attributes}
+            activeEntity={activeEntity}
+          />
+          <br/>
 
-      <OntologyConfig/>
-      <br/>
+          <OntologyConfig/>
+          <br/>
 
-      <SessionConfig/>
+          <SessionConfig/>
+        </div>
+      </Scrollbars>
     </div>
   )
 }

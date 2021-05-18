@@ -19,7 +19,7 @@ input[type="radio"] {
 }
 
 .config-label-inactive {
-    filter: brightness(36%);
+    filter: brightness(40%);
 }
 
 .attribute-input::placeholder {
