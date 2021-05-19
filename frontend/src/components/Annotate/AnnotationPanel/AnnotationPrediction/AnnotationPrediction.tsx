@@ -16,10 +16,10 @@ function AnnotationPrediction(props: any): JSX.Element {
   }
 
   return (
-    <div className="annotation-prediction" onClick={() => toggleCollapse()}>
-      <span className="annotation-text">
+    <div className="annotation-prediction">
+      <div className="annotation-prediction-text" onClick={() => toggleCollapse()}>
         2 annotation suggestions
-      </span>
+      </div>
 
       <MDBCollapse id="basicCollapse" isOpen={collapsedType}>
         <Annotation/>

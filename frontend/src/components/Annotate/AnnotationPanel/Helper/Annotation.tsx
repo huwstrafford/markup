@@ -15,13 +15,13 @@ function Annotation(): JSX.Element {
   }
 
   return (
-    <div className="annotation" onClick={() => toggleCollapse()}>
-      <span className="annotation-text">
+    <div className="annotation">
+      <div className="annotation-text" onClick={() => toggleCollapse()}>
         Some message here
-      </span>
+      </div>
 
       <MDBCollapse id="basicCollapse" isOpen={collapsedType}>
-        <div className="attribute">Some attribute here</div>
+        Hello, World!
       </MDBCollapse>
     </div>
   )
