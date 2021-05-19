@@ -28,7 +28,7 @@ function Home(): JSX.Element {
             Annotate
           </MDBBtn>
           <p>
-            <a href={Endpoint.Demo} className="demo-link">...or try out a demo</a>
+            <a href={Endpoint.Demo} className="demo-link">...or try a demo</a>
           </p>
         </div>
       </MDBCardBody>

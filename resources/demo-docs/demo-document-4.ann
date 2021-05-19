@@ -1,0 +1,7 @@
+T2	Hosp_number 247 265	two-pints-of-cider
+A2	YearDate T2 2012
+A3	Certainty T2 1
+T4	Diagnosis 443 459	around-2-minutes
+A5	DayDate T4 9
+A6	MonthDate T4 9
+A7	YearDate T4 2013

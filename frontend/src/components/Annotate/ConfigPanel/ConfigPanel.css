@@ -2,10 +2,6 @@ input[type="radio"] {
     visibility: hidden;
 }
 
-.config-value-row {
-    margin: 0px;
-}
-
 .config-label {
     border-radius: 4px;
     padding: 3px 5px;
@@ -18,25 +14,21 @@ input[type="radio"] {
     box-shadow: 0px 0.25px #1a1e24;
 }
 
-.config-label-inactive {
-    filter: brightness(40%);
-}
-
 .attribute-input::placeholder {
     color: white;
 }
 
 .attribute-input {
     border-radius: 5px;
-    margin: 0 10px;
     background-color: rgb(241, 241, 241);
     outline: none;
     border: none;
     padding: 3px 5px;
     color: #33FFB5;
     background-color: rgb(83, 83, 83);
+    margin-left: 2.5%;
 }
 
-.inactive-attribute {
-    display: none;
+.attribute-empty {
+    margin-left: 2.5%;
 }

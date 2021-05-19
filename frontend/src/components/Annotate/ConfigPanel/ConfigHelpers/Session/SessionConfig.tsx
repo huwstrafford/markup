@@ -1,10 +1,19 @@
 import { MDBBtn } from "mdbreact"
 
 function SessionConfig(props: any): JSX.Element {
+  const addAnnotation = () => {
+    alert(1)
+  }
+
   return (
     <>
-      <MDBBtn>+ Annotation</MDBBtn>
-      <MDBBtn>Export</MDBBtn>
+      <h4>Prefences</h4>
+      <hr/>
+
+      <div>
+        <MDBBtn onClick={addAnnotation}>+ Annotation</MDBBtn>
+        <MDBBtn>Export</MDBBtn>
+      </div>
     </>
   )
 }

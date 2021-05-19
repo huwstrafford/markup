@@ -5,8 +5,8 @@ import AnnotationPanel from "@markup/components/Annotate/AnnotationPanel/Annotat
 import ConfigPanel from "@markup/components/Annotate/ConfigPanel/ConfigPanel"
 import DocumentPanel from "@markup/components/Annotate/DocumentPanel/DocumentPanel"
 import Endpoint from "@markup/helpers/Endpoint"
+import SessionPanel from "./SessionPanel/SessionPanel"
 import "./Annotate.css"
-
 
 function Annotate(): JSX.Element {
   const [errorMessage, setErrorMessage] = useState("")
@@ -48,6 +48,13 @@ function Annotate(): JSX.Element {
 
           <MDBCol md="4">
             <AnnotationPanel
+              setErrorMessage={setErrorMessage}
+              setSuccessMessage={setSuccessMessage}
+            />
+          </MDBCol>
+          
+          <MDBCol md="12">
+            <SessionPanel
               setErrorMessage={setErrorMessage}
               setSuccessMessage={setSuccessMessage}
             />

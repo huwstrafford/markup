@@ -29,7 +29,9 @@
 }
 
 .demo-link {
-    color: rgb(158, 158, 158);
+    /* color: rgb(158, 158, 158); */
+    color: #ffc107;
     text-decoration: underline;
     font-size: 20px;
+    font-weight: bold;
 }

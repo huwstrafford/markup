@@ -2,15 +2,23 @@
     padding: 2.5% 5%;
     max-width: 100vw !important;
     font-size: 1.2em;
-    height: 80vh;
+    height: 100vh;
     overflow-y: hidden;
+    height: 90vh;
+    /* height: 80vh;
+    overflow-y: hidden; */
 }
 
 .panel {
-    background-color: rgba(66, 66, 66, 0.781);
+    background-color: rgba(37, 37, 37, 0.781);
     padding: 25px;
     border-radius: 5px;
     height: 70vh;
+}
+
+.panel-mini {
+    height: 10vh;
+    margin-top: 1.5%;
 }
 
 .panel-content {

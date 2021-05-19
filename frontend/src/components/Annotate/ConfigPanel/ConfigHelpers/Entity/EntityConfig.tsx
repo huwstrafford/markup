@@ -3,6 +3,9 @@ import { ENTITY_COLOUR } from "./EntityHelper"
 function EntityConfig(props: any): JSX.Element {
   return (
     <div className="config-entities">
+      <h4>Entities</h4>
+      <hr/>
+
       {props.entities.map((entity: string, index: number) => {
         let configLabelClasses = "config-label"
 
@@ -11,7 +14,7 @@ function EntityConfig(props: any): JSX.Element {
         }
 
         return (
-          <p className="config-value-row">
+          <div>
             <input
               type="radio"
               id={entity}
@@ -26,7 +29,7 @@ function EntityConfig(props: any): JSX.Element {
             >
               {entity}
             </label>
-          </p>
+          </div>
         )
       })}
     </div>
