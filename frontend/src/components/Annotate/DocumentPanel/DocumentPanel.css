@@ -2,3 +2,8 @@
     white-space: pre-wrap;
     color: rgb(255, 248, 235);
 }
+
+mark {
+    background-color: rgba(45, 101, 255, 0.911);
+    color: white;
+}
