@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Scrollbars from "react-custom-scrollbars-2"
+
 import {
   ATTRIBUTE_CATEGORY,
   DEFAULT_ATTRIBUTE,

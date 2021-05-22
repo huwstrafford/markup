@@ -1,3 +1,5 @@
+import randomstring from "randomstring"
+
 import { ENTITY_COLOUR } from "./EntityHelper"
 
 function EntityConfig(props: any): JSX.Element {
@@ -7,20 +9,21 @@ function EntityConfig(props: any): JSX.Element {
       <hr/>
 
       {props.entities.map((entity: string, index: number) => {
-        let configLabelClasses = "config-label"
-
-        if (props.activeEntity !== entity) {
-          configLabelClasses += " config-label-inactive"
-        }
+        const configLabelClasses =
+          props.activeEntity === entity
+          ? "config-label" 
+          : "config-label config-label-inactive"
+        const key = randomstring.generate()
 
         return (
-          <div>
+          <div key={key}>
             <input
               type="radio"
               id={entity}
               name="entities"
               value={entity}
             />
+
             <label
               className={configLabelClasses}
               onClick={() => props.setActiveEntity(entity)}

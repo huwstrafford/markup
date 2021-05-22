@@ -4,6 +4,8 @@
 }
 
 mark {
-    background-color: rgba(45, 101, 255, 0.911);
+    background-color: #0763D2;
     color: white;
+    margin: 0;
+    padding: 0;
 }

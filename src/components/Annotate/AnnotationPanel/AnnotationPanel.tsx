@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react"
 import Scrollbars from "react-custom-scrollbars-2"
+import randomstring from "randomstring"
 
 import AnnotationPrediction from "./AnnotationPrediction/AnnotationPrediction"
 import Annotation from "./Helper/Annotation"
 import "./AnnotationPanel.css"
 
 
+// TODO change to map entity: [annotations]
 interface Annotation {
   entity: string,
   message: string,
   attributes: string[],
 }
-
-// TODO change to map entity: [annotations]
 
 const DEFAULT_ANNOTATION = [] as Annotation[]
 
@@ -39,7 +39,9 @@ function AnnotationPanel(props: any): JSX.Element {
           <AnnotationPrediction/>
         
           {annotations.map((annotation: Annotation, index: number) => {
-            return <Annotation/>
+            const key = randomstring.generate()
+
+            return <Annotation key={key}/>
           })}
         </div>
       </Scrollbars>
