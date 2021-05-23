@@ -1,0 +1,43 @@
+.docs {
+    margin: 2.5% 30%;
+}
+
+.docs-section {
+    margin-bottom: 5%;
+}
+
+.docs-section-header {
+    margin-bottom: 2.5%;
+}
+
+.docs-section-header-reference {
+    margin-right: 5px;
+    color: #33FFB5;
+}
+
+.docs-section-body {
+    font-size: 20px;
+}
+
+.docs-subsection {
+    margin-left: 3%;
+}
+
+.docs-field-required {
+    color: red;
+}
+
+.docs-field-name {
+    background-color: #33FFB5;
+    color: rgb(0, 0, 0);
+    border-radius: 2px;
+    padding: 0 5px;
+}
+
+.docs-field-divider {
+    margin: 0 5px;
+}
+
+.docs-field-description {
+
+}
