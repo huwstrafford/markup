@@ -1,0 +1,25 @@
+.data-generator-container {
+    margin: 2.5%;
+}
+
+.data-generator-panel {
+    padding: 2.5% 3%;
+    background-color: rgba(37, 37, 37, 0.781);
+    margin-bottom: 3%;
+    height: 55vh;
+    font-size: 16px;
+}
+
+.data-generator-panel-small {
+    text-align: center;
+    height: 17.5vh;
+}
+
+.data-generator-button {
+    background-color: lightgray !important;
+    color: black !important;
+}
+
+.data-generator-input {
+    width: 100%;
+}

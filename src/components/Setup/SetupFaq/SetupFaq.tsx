@@ -17,7 +17,12 @@ function SetupFaq(): JSX.Element {
 
       <QuestionAndAnswer
         question="What is a configuration file?"
-        answer={<>A configuration file defines the <a href="/">entities</a>, <a href="/">attributes</a>, and relationships that you plan to annotate.</>}
+        answer={
+          <>
+            A configuration file defines the <a href="/">entities</a>, <a href="/">attributes</a>, and relationships that
+            you intend to capture. You can create one using Markup's <a href="/">in-built</a> configuration file creator.
+          </>
+        }
       />
 
       <QuestionAndAnswer

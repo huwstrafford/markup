@@ -1,3 +1,4 @@
+import Endpoint, { NewTab } from "@markup/helpers/Endpoint"
 import "./Docs.css"
 
 function Docs(): JSX.Element {
@@ -22,8 +23,8 @@ function Docs(): JSX.Element {
         header="Demo"
         body={
           <span>
-            Try out Markup using synthetically-generated
-            documents, <a href="/demo" target="_blank">here</a>.
+            Try out Markup while annotating a set of synthetically-generated
+            documents, <NewTab endpoint={Endpoint.Demo} text="here"/>.
           </span>
         }
       />
@@ -41,14 +42,47 @@ function Docs(): JSX.Element {
 
       <SubSection
         reference="installation-github"
-        header="Github"
-        body="Clone it from GitHub"
+        header="Yarn"
+        body={
+          <>
+            <p>Run the following:</p>
+
+            <pre className="docs-code">
+              <code>
+                git clone https://www.github.com/samueldobbie/markup
+                <br/>
+                cd markup
+                <br/>
+                ./setup.sh
+                <br/>
+              </code>
+            </pre>
+
+            <p>
+              Then visit <a href="https://localhost:1234">https://localhost:1234</a>
+            </p>
+          </>
+        }
       />
 
       <SubSection
         reference="installation-docker"
         header="Docker"
-        body="Pull it from DockerHub"
+        body={
+          <>
+            <p>Run the following:</p>
+
+            <pre className="docs-code">
+              <code>
+                docker run -d -p 80:8000 samueldobbie/markup
+              </code>
+            </pre>
+
+            <p>
+              Then visit <a href="https://localhost:1234">https://localhost:1234</a>
+            </p>
+          </>
+        }
       />
 
       <Section
@@ -57,7 +91,7 @@ function Docs(): JSX.Element {
         body={
           <span>
             To start using Markup for document annotation,
-            visit the <a href="/setup" target="_blank">setup</a> page 
+            visit the <NewTab endpoint={Endpoint.SetupForm} text="setup"/> page 
             and select the quantity of documents you want to annotate
             and populate the remaining fields as described below.
           </span>
@@ -71,34 +105,65 @@ function Docs(): JSX.Element {
           <div>
             <Field
               name="Document to annotate"
-              description="The document you intend to annotate (must have .txt file extension)."
+              description="The document you intend to annotate (must be .txt file)."
               required={true}
             />
 
             <Field
               name="Configuration file"
-              description="
-                Defines all entities and attributes available during annotation. Select an existing
-                configuration file (that has the .conf file extension and is formatted as shown here),
-                or create a new one using the in-built config creator.
-              "
+              description={
+                <>
+                  The file defining all entities and attributes that will be
+                  available during the annotation session (must be .conf file).
+                  Markup offers an in-built configuration file creator, <NewTab endpoint={Endpoint.ConfigCreator} text="here"/>.
+                </>
+              }
               required={true}
             />
 
             <Field
               name="Existing annotations"
               description="
-                A file containing existing annotations for the document you intend to annotate.
-                The annotation file must have the .ann file extension and be in standoff format.
+                A file containing existing annotations for the document you intend
+                to annotate. The annotation file must have the .ann file extension
+                and be in standoff format.
               "
               required={false}
             />
 
             <Field
               name="Ontology"
-              description="A dictionary of terms, codes, and related data to be accessed during annotation."
+              description="
+                A dictionary of terms, codes, and related data to be
+                accessed during annotation.
+              "
               required={false}
             />
+
+            <ul>
+              <li>
+                <Field
+                  name="Pre-loaded"
+                  description="
+                    Markup offers pre-loaded ontologies that can be used. Certain pre-loaded
+                    ontologies require external permissions (e.g. the Unified Medical Language
+                    System).
+                  "
+                  required={false}
+                />
+              </li>
+
+              <li>
+                <Field
+                  name="Custom"
+                  description="
+                    You can provide a custom ontology by providing a text document, where each line
+                    is of the form [TERM][TAB][CODE], as shown below.
+                  "
+                  required={false}
+                />
+              </li>
+            </ul>
           </div>
         }
       />
@@ -138,11 +203,12 @@ function SubSection(props: any): JSX.Element {
 
 function Field(props: any): JSX.Element {
   return (
-    <p>
-      <span className="docs-field-name">{props.name}</span>
-      <span className="docs-field-divider">-</span>
-      <span className="docs-field-description">{props.description}</span>
-    </p>
+    <div className="abxsds">
+      <p className="docs-field-name">
+        {props.name} {props.required && <span>(required)</span>}  
+      </p>
+      <p className="docs-field-description">{props.description}</p>
+    </div>
   )
 }
 

@@ -61,7 +61,7 @@ function Nav(): JSX.Element {
             <MDBNavLink to={Endpoint.SetupForm}>Annotate</MDBNavLink>
           </MDBNavItem>
 
-          <MDBNavItem className="nav-item-custom">
+          <MDBNavItem className="nav-item-custom github">
             <GitHubButton
               href="https://github.com/samueldobbie/markup"
               data-size="large"
