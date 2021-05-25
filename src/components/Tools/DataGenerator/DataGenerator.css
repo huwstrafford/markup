@@ -1,13 +1,14 @@
 .data-generator-container {
-    margin: 2.5%;
+    height: 75vh;
+    width: 60vw;
+    margin: 1.5% auto;
 }
 
 .data-generator-panel {
-    padding: 2.5% 3%;
+    padding: 4% 5%;
     background-color: rgba(37, 37, 37, 0.781);
-    margin-bottom: 3%;
-    height: 55vh;
-    font-size: 16px;
+    margin: 1% 8%;
+    border-radius: 5px;
 }
 
 .data-generator-panel-small {
@@ -15,11 +16,64 @@
     height: 17.5vh;
 }
 
+.data-generator-header {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2.5%;
+}
+
 .data-generator-button {
     background-color: lightgray !important;
     color: black !important;
+    font-weight: bold;
+    width: 100%;
+    font-size: 18px;
+    height: 50px;
+    margin: 0;
+    text-transform: none;
 }
 
 .data-generator-input {
+    background-color: white;
+    color: #1A1E24;
     width: 100%;
+    padding: 8px 12.5px;
+    margin-bottom: 1.5%;
+    border-radius: 3px;
+    outline: none;
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    box-shadow: 0px 0.25px #1a1e24;
+}
+
+.data-generator-input-small {
+    width: 25%;
+}
+
+.data-generator-quantity-text {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.data-generator-quantity-range {
+    width: 100%;
+}
+
+.data-generator-quantity-container {
+    width: 60%;
+    float: left;
+}
+
+.data-generator-output-container {
+    float: right;
+    width: 40%;
+}
+
+.data-generator-output-button {
+    font-weight: bold;
+    height: 50px;
+    font-size: 18px;
+    text-transform: none;
 }

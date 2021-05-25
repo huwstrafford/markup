@@ -1,0 +1,49 @@
+.config-creator-container {
+    height: 75vh;
+    width: 60vw;
+    margin: 1.5% auto;
+}
+
+.config-creator-panel {
+    padding: 4% 5%;
+    background-color: rgba(37, 37, 37, 0.781);
+    margin: 1% 8%;
+    border-radius: 5px;
+}
+
+.config-creator-panel-small {
+    text-align: center;
+    height: 17.5vh;
+}
+
+.config-creator-header {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 2.5%;
+}
+
+.config-creator-button {
+    background-color: lightgray !important;
+    color: black !important;
+    font-weight: bold;
+    width: 100%;
+    font-size: 18px;
+    height: 50px;
+    margin: 0;
+    text-transform: none;
+}
+
+.config-creator-input {
+    background-color: white;
+    color: #1A1E24;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 1.5%;
+    border-radius: 3px;
+    outline: none;
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    box-shadow: 0px 0.25px #1a1e24;
+}
