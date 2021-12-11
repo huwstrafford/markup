@@ -19,17 +19,9 @@ $(document).ready(function () {
     // Set setup type to complete by default
     updateCompleteComponent('setup-type-container');
 
-    /* Single file selection options */
-
-    //$('#document-file-opener').change(function () { storeSingleFile('document') });
-
-    //$('#annotation-file-opener').change(function () { storeSingleFile('annotation') });
 
     $('#config-file-opener').change(function() { storeSingleFile('config') });
 
-    //$('#ontology-file-opener').change(function () { useCustomOntology('file') });
-
-    //$('#ontology-file-dropdown').change(function () { useExistingOntology('file') });
 
     $('#annotation-file-remover').click(function () {
         // Remove file
@@ -42,9 +34,6 @@ $(document).ready(function () {
         $('#annotation-file-opener-container').css('border', 'none');
     });
 
-    // $('#start-annotating-file').click(function() {
-    //     startAnnotating('file');
-    // });
 
     /* Multiple file selection options */
 
@@ -186,27 +175,10 @@ function storeSingleFile(type) {
     updateCompleteComponent(type + '-file-opener-container');
 }
 
-function startAnnotating(type) {
-    // Set default open document
-    localStorage.setItem('openDocId', 0);
-
-    // Verify all required components are complete
-    let ready = true;
-    $('.option-' + type + '-container').each(function() {
-        if ($(this).attr('complete') != 'true') {
-            $(this).css('border', '1px solid red');
-            ready = false;
-        }
-    });
-    // Move to annotation page
-    if (ready) location.href = '/annotate';
-}
 
 function getDocName(file) {
     return file.name.split('.').slice(0, -1).join('.');
 }
-
-
 
 
 
