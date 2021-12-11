@@ -308,7 +308,7 @@ function displayAttributes() {
 
 function styleSelectedEntity() {
     resetEntityStyle();
-
+//Can you add something here so when you click on another entity the attributes for the old one are cleared/removed?
     if (activeEntity == $(this).val()) {
         // Reset entity and attributes
         activeEntity = '';
@@ -631,8 +631,8 @@ function constructContentContainer(annotationIndex, attributeValues, isSuggestio
     for (let i = 0; i < attributeValues.length; i++) {
         $('<p/>', {
             'class': 'attribute ' + attributeClass,
-            'text': attributeValues[i],
-            'onClick': 'editAnnotation(this)'
+            'text': attributeValues[i]
+            //'onClick': 'editAnnotation()'
         }).appendTo(contentContainer);
     }
 
@@ -676,7 +676,52 @@ function constructButton(type, annotationIndex) {
 }
 
 function editAnnotation(element) {
-    // TODO
+    const openDocId = localStorage.getItem('openDocId');
+    const annotationId = parseInt($(this).parent().attr('for').split('-')[1]);
+    const name = $(this).text().split(': ')[0].trim();
+    const value = $(this).text().split(': ')[1].trim();
+    const updatedValue = prompt('Updated value (' + name + ')', value);
+
+    if (updatedValue && updatedValue.trim() != '') {
+        $(this).text(name + ': ' + updatedValue);
+    }
+
+    const forId = $(this).parent().attr('for');
+    $('#' + forId).attr(name, updatedValue);
+
+    // Find Annotation
+    for (let i = 0; i < offsets.length; i++) {
+        if (offsets[i][0] == annotationId) {
+            //annotations[openDocId].splice(i, 1);
+            AnnToEdit = offsets[i][2];
+            NewAnnotation = annotations[openDocId][i];
+            for (let j = 0; j < AnnToEdit.length; j++) {
+                if (AnnToEdit[j].split(': ')[0] == name) {
+                    newValue = name + ": " + updatedValue + "\n";
+                    AnnToEdit[j] = newValue;
+                    offsets.splice(j,1,AnnToEdit);
+                }
+                
+            }
+            for (let k = 1; k < NewAnnotation.length; k++) {
+                EntName = NewAnnotation[k][0].split("\t")[1];
+                OtherValues = NewAnnotation[k][0].split("\t")[0];
+                if (EntName.startsWith(name)){
+                    EntNameReal = EntName.split(" ")[0];
+                    TNumber = EntName.split(" ")[1];
+                    OldValue = EntName.split(" ")[2];
+                    NewValue2 = OtherValues + "\t" + EntNameReal + " " + TNumber + " " + updatedValue + "\n";
+                    NewValueArray = [NewValue2];
+                    NewAnnotation[k] = NewValueArray;
+                    annotations[openDocId].splice(i,1,NewAnnotation);
+                }
+                
+            }
+            ;
+        }
+        //offsets.splice(i, 1);
+    }
+    setupSession(isNewSession=false);
 }
 
 function deleteAnnotation(element) {
@@ -851,6 +896,7 @@ function bindAnnotationEvents() {
     });
 
     $('.suggestion-attribute').click(editSuggestion);
+    $('.annotation-attribute').click(editAnnotation);
 }
 
 function highlightSuggestionText(suggestionText) {
