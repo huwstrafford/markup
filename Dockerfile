@@ -1,5 +1,7 @@
 FROM python:3.8.6
 
+RUN /usr/local/bin/python -m pip install --upgrade pip
+
 WORKDIR /usr/src/app
 
 COPY requirements.txt ./

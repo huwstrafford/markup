@@ -1,9 +1,9 @@
-tensorflow==2.8.0
+tensorflow
 Django==4.1.3
-Keras==2.8.0
+Keras
 modAL==0.3.6
 requests==2.24.0
 simstring-pure==1.0.0
 StringDist==1.0.9
 deepdiff==5.5.0
-protobuf==3.20.*
+protobuf
