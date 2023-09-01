@@ -405,7 +405,8 @@ function addEntityData(entityData, tagId, annotationData) {
 function addAttributeData(attributeData, tagId, annotationData) {
     // Increase global attribute id based on no. of attributes
     const openDocId = localStorage.getItem('openDocId');
-    attributeIds[openDocId] = Math.max(attributeIds[openDocId], tagId);
+    attributeIds[openDocId] = getMaxAValue()+2;
+    // attributeIds[openDocId] = Math.max(attributeIds[openDocId], tagId);
 
     // Include attribute data
     annotationData['attributeValues'].push(
@@ -1038,45 +1039,91 @@ function getFormattedEntity(selectionText, startIndex, endIndex) {
     const openDocId = localStorage.getItem('openDocId');
     const id = $('input[type=radio]:checked')[0].id;
     const entity = id.substring(0, id.length - 6);
-    return `T${entityIds[openDocId]++}\t${entity} ${startIndex} ${endIndex}\t${normaliseText(selectionText)}\n`;
+    // here i want to get the max T value for the AnnotationTextFile and add one to it
+    // console.log(`T${getMaxTValue()+1}\t${entity} ${startIndex} ${endIndex}\t${normaliseText(selectionText)}\n`)
+    return `T${getMaxTValue()+1}\t${entity} ${startIndex} ${endIndex}\t${normaliseText(selectionText)}\n`;
+}
+
+function getMaxTValue() {
+    const openDocId = localStorage.getItem('openDocId');
+    // console.log(localStorage.getItem(`annotationText${openDocId}`));
+    const annotationText = localStorage.getItem(`annotationText${openDocId}`);
+    const annotationTextArray = annotationText.split(/\r?\n/);
+    // console.log(annotationTextArray.length);
+    // console.log(annotationTextArray[1]);
+    // console.log(annotationText.length);
+    const TValues = [];
+    for (let i = 0; i < annotationTextArray.length; i++) {
+        if (annotationTextArray[i].startsWith("T")) {
+            TValues.push(annotationTextArray[i].split(" ")[0].split('\t')[0].split('T')[1]);
+        }
+    }
+    // console.log(TValues);
+    return Math.max(...TValues);
 }
 
 function getFormattedAttributes() {
     const result = [];
 
+    var aValue = getMaxAValue();
     // Construct attributes from checkboxes
     const checkboxes = $('input[type=checkbox]:checked');
     for (let i = 0; i < checkboxes.length; i++) {
+        aValue++;
         const key = checkboxes[i].id;
-        result.push(formatAttribute('checkbox', key));
+        result.push(formatAttribute('checkbox', aValue, key));
     }
 
     // Construct attributes from dropdowns
     const attributeDropdowns = $('input[name=values]');
     for (let i = 0; i < attributeDropdowns.length; i++) {
         if (attributeDropdowns[i].value != '') {
+            aValue++;
             const kv = getKeyValuePair(attributeDropdowns[i]);
-            result.push(formatAttribute('dropdown', kv[0], kv[1]));
+            result.push(formatAttribute('dropdown', aValue, kv[0], kv[1]));
         }
     }
 
     // Construct attributes from ontology mapping
     const ontologyOption = $('#match-list')[0].options[$('#match-list')[0].selectedIndex];
     if (isValidOntologyMapping(ontologyOption.text)) {
+        aValue++;
         const ontologyCode = ontologyOption.title.split(' ')[1];
-        result.push(formatAttribute('ontology', 'CUIPhrase', ontologyOption.text));
-        result.push(formatAttribute('ontology', 'CUI', ontologyCode));
+        result.push(formatAttribute('ontology', aValue, 'CUIPhrase', ontologyOption.text));
+        result.push(formatAttribute('ontology', aValue, 'CUI', ontologyCode));
     }
 
     return result;
 }
 
-function formatAttribute(type, key, value=null) {
+function formatAttribute(type, aValue, key, value=null) {
     const openDocId = localStorage.getItem('openDocId');
+    console.log(aValue);
+    console.log(attributeIds[openDocId]);
+    // var aValue = getMaxAValue();
+    // console.log(attributeIds);
     if (type == 'checkbox') {
-        return `A${attributeIds[openDocId]++}\t${normaliseText(key)} T${entityIds[openDocId] - 1}\n`;
+        return `A${aValue}\t${normaliseText(key)} T${getMaxTValue()+1}\n`;
     }
-    return `A${attributeIds[openDocId]++}\t${normaliseText(key)} T${entityIds[openDocId] - 1} ${normaliseText(value)}\n`;
+    return `A${aValue}\t${normaliseText(key)} T${getMaxTValue()+1} ${normaliseText(value)}\n`;
+}
+
+function getMaxAValue() {
+    const openDocId = localStorage.getItem('openDocId');
+    // console.log(localStorage.getItem(`annotationText${openDocId}`));
+    const annotationText = localStorage.getItem(`annotationText${openDocId}`);
+    const annotationTextArray = annotationText.split(/\r?\n/);
+    // console.log(annotationTextArray.length);
+    // console.log(annotationTextArray[1]);
+    // console.log(annotationText.length);
+    const TValues = [];
+    for (let i = 0; i < annotationTextArray.length; i++) {
+        if (annotationTextArray[i].startsWith("A")) {
+            TValues.push(annotationTextArray[i].split(" ")[0].split('\t')[0].split('A')[1]);
+        }
+    }
+    // console.log(TValues);
+    return Math.max(...TValues);
 }
 
 function normaliseText(raw) {
@@ -1501,6 +1548,7 @@ function updateExportUrl(output) {
     exportButton.download = docName;
 }
 
+// set entity ID and attribute ID here - read the annotation file and set the ID to the last ID in the file
 let entityIds = [];
 let attributeIds = [];
 let annotations = [];
