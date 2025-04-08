@@ -453,6 +453,7 @@ function runAllIAA() {
     for (let i = 0; i < numberofDocs; i++) {
         ann1[i] = localStorage.getItem('firstannotationText' + i)
         ann2[i] = localStorage.getItem('secondannotationText' + i)
+        //console.log(i)
     }
     //console.log(ann1);
     $.ajax({
