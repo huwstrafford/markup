@@ -1,7 +1,7 @@
 from django.shortcuts import render, resolve_url
 import re
 import operator
-from deepdiff import DeepDiff
+#from deepdiff import DeepDiff
 from django.http import HttpResponse
 import json
 from collections import defaultdict

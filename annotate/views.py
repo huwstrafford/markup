@@ -16,14 +16,14 @@ from simstring.searcher import Searcher
 from simstring.feature_extractor.character_ngram import (
     CharacterNgramFeatureExtractor
 )
-from keras.models import Model, load_model
-from keras.layers import Input
+# from keras.models import Model, load_model
+# from keras.layers import Input
 
-from modAL.models import ActiveLearner
-from modAL.uncertainty import uncertainty_sampling
+# from modAL.models import ActiveLearner
+# from modAL.uncertainty import uncertainty_sampling
 
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.feature_extraction.text import CountVectorizer
+# from sklearn.ensemble import RandomForestClassifier
+# from sklearn.feature_extraction.text import CountVectorizer
 
 
 def annotate_data(request):
@@ -233,344 +233,344 @@ def get_ranked_ontology_matches(cleaned_term):
     return ranked_matches
 
 
-def suggest_annotations(request):
-    '''
-    Return annotation suggestions
-    (incl. attributes) for the open document
-    '''
-    doc_text = request.POST['docText']
-    annotation_texts = set(json.loads(request.POST['annotationTexts']))
+# def suggest_annotations(request):
+#     '''
+#     Return annotation suggestions
+#     (incl. attributes) for the open document
+#     '''
+#     doc_text = request.POST['docText']
+#     annotation_texts = set(json.loads(request.POST['annotationTexts']))
 
-    # Predict target sentences (that contain prescriptions)
-    target_sentences = sentence_classifier.get_target_sentences(
-        doc_text, annotation_texts
-    )
+#     # Predict target sentences (that contain prescriptions)
+#     target_sentences = sentence_classifier.get_target_sentences(
+#         doc_text, annotation_texts
+#     )
 
-    # Predict attributes from target sentences
-    suggestions = []
-    for sentence in target_sentences:
-        prediction = annotation_predictor.predict(sentence)
-        if prediction is not None:
-            suggestions.append(prediction)
+#     # Predict attributes from target sentences
+#     suggestions = []
+#     for sentence in target_sentences:
+#         prediction = annotation_predictor.predict(sentence)
+#         if prediction is not None:
+#             suggestions.append(prediction)
 
-    return HttpResponse(json.dumps(suggestions))
-
-
-def teach_active_learner(request):
-    '''
-    Teach active learner upon acceptance,
-    rejection of related annotation
-    '''
-    sentence = request.POST['sentence']
-    label = int(request.POST['label'])
-    sentence_classifier.teach(sentence, label)
-    return HttpResponse(None)
+#     return HttpResponse(json.dumps(suggestions))
 
 
-def teach_seq2seq():
-    pass
+# def teach_active_learner(request):
+#     '''
+#     Teach active learner upon acceptance,
+#     rejection of related annotation
+#     '''
+#     sentence = request.POST['sentence']
+#     label = int(request.POST['label'])
+#     sentence_classifier.teach(sentence, label)
+#     return HttpResponse(None)
 
 
-class SentenceClassifier:
-    def __init__(self, PATH):
-        self.user_data_path = PATH + '/data/text/user-classifier-data.txt'
-        self.synthetic_data_path = PATH + '/data/text/synthetic-classifier-data.txt'
-        self.setup_model()
-
-    def setup_model(self):
-        '''
-        Define active learner and train
-        with synthetic + stored examples
-        '''
-        # Read in training data
-        with open(self.user_data_path, encoding='utf-8') as f:
-            data = f.read().split('\n')
-
-        with open(self.synthetic_data_path, encoding='utf-8') as f:
-            data += f.read().split('\n')
-
-        # Remove duplicates
-        data = set(data)
-
-        # Setup vectorizer and prepare training data
-        self.vectorizer = CountVectorizer()
-        self.X, self.y = [], []
-        for row in data:
-            row = row.split('\t')
-            if len(row) == 2:
-                self.X.append(row[0].strip())
-                self.y.append(int(row[1]))
-        self.X = self.vectorizer.fit_transform(self.X)
-
-        self.learner = ActiveLearner(
-            estimator=RandomForestClassifier(),
-            query_strategy=uncertainty_sampling,
-            X_training=self.X,
-            y_training=self.y
-        )
-
-    def get_target_sentences(self, text, annotations):
-        '''
-        Return sentences that contain
-        a prescription
-        '''
-        sentences = self.text_to_sentences(text)
-
-        target_sentences = []
-        for sentence in sentences:
-            classification = self.learner.predict(self.vectorizer.transform([sentence]))
-            if classification[0] == 1 and self.convert_to_export_format(sentence) not in annotations:
-                target_sentences.append(sentence)
-        return target_sentences
-
-    def convert_to_export_format(self, sentence):
-        return '-'.join(sentence.split(' '))
-
-    def text_to_sentences(self, text):
-        '''
-        Convert body of text into individual sentences
-        '''
-        sentences = re.split(delimiters, text)
-        sentences = map(self.clean_sentence, sentences)
-        return list(filter(self.is_valid_sentence, sentences))
-
-    def clean_sentence(self, sentence):
-        return sentence.strip()
-
-    def is_valid_sentence(self, sentence):
-        return sentence != '' and sentence not in stopwords and len(sentence.split(' ')) >= 3 
-
-    def teach(self, sentence, label):
-        '''
-        Save training data and update model
-        '''
-        # Store local data
-        sentence = sentence.lower().strip()
-        with open(self.user_data_path, 'a', encoding='utf-8') as f:
-            f.write(sentence + '\t' + str(label) + '\n')
-
-        # Setup learner with new data (to-do: train incrementally)
-        self.setup_model()
+# def teach_seq2seq():
+#     pass
 
 
-class Seq2Seq:
-    def __init__(self, PATH):
-        # Declare model configurations (same as during training)
-        self.latent_dim = 256
-        self.num_samples = 50000
-        self.data_path = PATH + '/data/text/synthetic-seq2seq-data.txt'
-        self.model_path = PATH + '/data/model/seq2seq.h5'
+# class SentenceClassifier:
+#     def __init__(self, PATH):
+#         self.user_data_path = PATH + '/data/text/user-classifier-data.txt'
+#         self.synthetic_data_path = PATH + '/data/text/synthetic-classifier-data.txt'
+#         self.setup_model()
 
-        # Restore model ready for use
-        self.restore_model()
+#     def setup_model(self):
+#         '''
+#         Define active learner and train
+#         with synthetic + stored examples
+#         '''
+#         # Read in training data
+#         with open(self.user_data_path, encoding='utf-8') as f:
+#             data = f.read().split('\n')
 
-    def restore_model(self):
-        # Read in training data
-        with open(self.data_path, encoding='utf-8') as f:
-            lines = f.read().split('\n')
+#         with open(self.synthetic_data_path, encoding='utf-8') as f:
+#             data += f.read().split('\n')
 
-        # Vectorize training data
-        input_texts = []
-        target_texts = []
-        input_words = set()
-        target_words = set()
-        for line in lines[:min(self.num_samples, len(lines)-1)]:
-            line = line.lower()
+#         # Remove duplicates
+#         data = set(data)
 
-            # Parse input and target texts
-            input_text, target_text = line.split('\t')
-            target_text = '\t ' + target_text + ' \n'
-            input_texts.append(input_text)
-            target_texts.append(target_text)
+#         # Setup vectorizer and prepare training data
+#         self.vectorizer = CountVectorizer()
+#         self.X, self.y = [], []
+#         for row in data:
+#             row = row.split('\t')
+#             if len(row) == 2:
+#                 self.X.append(row[0].strip())
+#                 self.y.append(int(row[1]))
+#         self.X = self.vectorizer.fit_transform(self.X)
 
-            # Define vocabulary of input words
-            for word in input_text.split(' '):
-                input_words.add(word)
+#         self.learner = ActiveLearner(
+#             estimator=RandomForestClassifier(),
+#             query_strategy=uncertainty_sampling,
+#             X_training=self.X,
+#             y_training=self.y
+#         )
 
-            # Define vocabulary of target words
-            for word in target_text.split(' '):
-                target_words.add(word)
+#     def get_target_sentences(self, text, annotations):
+#         '''
+#         Return sentences that contain
+#         a prescription
+#         '''
+#         sentences = self.text_to_sentences(text)
 
-            # Add divisors to vocabularies
-            input_words.add(' ')
-            target_words.add(' ')
+#         target_sentences = []
+#         for sentence in sentences:
+#             classification = self.learner.predict(self.vectorizer.transform([sentence]))
+#             if classification[0] == 1 and self.convert_to_export_format(sentence) not in annotations:
+#                 target_sentences.append(sentence)
+#         return target_sentences
 
-        # Sort vocabularies
-        input_words = sorted(list(input_words))
-        target_words = sorted(list(target_words))
+#     def convert_to_export_format(self, sentence):
+#         return '-'.join(sentence.split(' '))
 
-        # Count texts, tokens and maximum sequence lengths
-        self.num_encoder_tokens = len(input_words)
-        self.num_decoder_tokens = len(target_words)
-        self.max_encoder_seq_length = max([len(input_text.split(' ')) for input_text in input_texts])
-        self.max_decoder_seq_length = max([len(target_text.split(' ')) for target_text in target_texts])
+#     def text_to_sentences(self, text):
+#         '''
+#         Convert body of text into individual sentences
+#         '''
+#         sentences = re.split(delimiters, text)
+#         sentences = map(self.clean_sentence, sentences)
+#         return list(filter(self.is_valid_sentence, sentences))
 
-        # Index each word in input vocabulary
-        self.input_token_index = dict([
-            (word, i) for i, word in enumerate(input_words)
-        ])
+#     def clean_sentence(self, sentence):
+#         return sentence.strip()
 
-        # Index each word in target vocabulary
-        self.target_token_index = dict([
-            (word, i) for i, word in enumerate(target_words)
-        ])
+#     def is_valid_sentence(self, sentence):
+#         return sentence != '' and sentence not in stopwords and len(sentence.split(' ')) >= 3 
 
-        encoder_input_data = np.zeros((len(input_texts), self.max_encoder_seq_length, self.num_encoder_tokens), dtype='uint8')
+#     def teach(self, sentence, label):
+#         '''
+#         Save training data and update model
+#         '''
+#         # Store local data
+#         sentence = sentence.lower().strip()
+#         with open(self.user_data_path, 'a', encoding='utf-8') as f:
+#             f.write(sentence + '\t' + str(label) + '\n')
 
-        for i, input_text in enumerate(input_texts):
-            for t, word in enumerate(input_text.split(' ')):
-                encoder_input_data[i, t, self.input_token_index[word]] = 1.
-            encoder_input_data[i, t + 1:, self.input_token_index[' ']] = 1.
+#         # Setup learner with new data (to-do: train incrementally)
+#         self.setup_model()
 
-        # Restore the model
-        self.model = load_model(self.model_path)
 
-        # Construct the encoder
-        encoder_inputs = self.model.input[0]
-        encoder_outputs, state_h_enc, state_c_enc = self.model.layers[2].output
-        encoder_states = [state_h_enc, state_c_enc]
-        self.encoder_model = Model(encoder_inputs, encoder_states)
+# class Seq2Seq:
+#     def __init__(self, PATH):
+#         # Declare model configurations (same as during training)
+#         self.latent_dim = 256
+#         self.num_samples = 50000
+#         self.data_path = PATH + '/data/text/synthetic-seq2seq-data.txt'
+#         self.model_path = PATH + '/data/model/seq2seq.h5'
 
-        # Construct the decoder
-        decoder_inputs = self.model.input[1]
-        decoder_state_input_h = Input(shape=(self.latent_dim,), name='input_3')
-        decoder_state_input_c = Input(shape=(self.latent_dim,), name='input_4')
-        decoder_states_inputs = [decoder_state_input_h, decoder_state_input_c]
-        decoder_lstm = self.model.layers[3]
-        decoder_outputs, state_h_dec, state_c_dec = decoder_lstm(
-            decoder_inputs,
-            initial_state=decoder_states_inputs
-        )
-        decoder_states = [state_h_dec, state_c_dec]
-        decoder_dense = self.model.layers[4]
-        decoder_outputs = decoder_dense(decoder_outputs)
-        self.decoder_model = Model(
-            [decoder_inputs] + decoder_states_inputs,
-            [decoder_outputs] + decoder_states
-        )
+#         # Restore model ready for use
+#         self.restore_model()
 
-        # Reverse-lookup token index to decode sequences back to readable form
-        self.reverse_target_word_index = dict(
-            (i, word) for word, i in self.target_token_index.items()
-        )
+#     def restore_model(self):
+#         # Read in training data
+#         with open(self.data_path, encoding='utf-8') as f:
+#             lines = f.read().split('\n')
 
-    def decode_sequence(self, input_seq):
-        # Encode the input as state vectors.
-        states_value = self.encoder_model.predict(input_seq)
+#         # Vectorize training data
+#         input_texts = []
+#         target_texts = []
+#         input_words = set()
+#         target_words = set()
+#         for line in lines[:min(self.num_samples, len(lines)-1)]:
+#             line = line.lower()
 
-        # Generate empty target sequence of length 1.
-        target_seq = np.zeros((1, 1, self.num_decoder_tokens))
+#             # Parse input and target texts
+#             input_text, target_text = line.split('\t')
+#             target_text = '\t ' + target_text + ' \n'
+#             input_texts.append(input_text)
+#             target_texts.append(target_text)
 
-        # Populate the first character of target sequence with the start token
-        target_seq[0, 0, self.target_token_index['\t']] = 1.
+#             # Define vocabulary of input words
+#             for word in input_text.split(' '):
+#                 input_words.add(word)
 
-        # Sampling loop for a batch of sequences
-        stop_condition = False
-        decoded_sentence = ''
-        while not stop_condition:
-            output_tokens, h, c = self.decoder_model.predict([target_seq] + states_value)
+#             # Define vocabulary of target words
+#             for word in target_text.split(' '):
+#                 target_words.add(word)
 
-            # Sample a token
-            sampled_token_index = np.argmax(output_tokens[0, -1, :])
-            sampled_word = self.reverse_target_word_index[sampled_token_index]
+#             # Add divisors to vocabularies
+#             input_words.add(' ')
+#             target_words.add(' ')
 
-            decoded_sentence += sampled_word + ' '
+#         # Sort vocabularies
+#         input_words = sorted(list(input_words))
+#         target_words = sorted(list(target_words))
 
-            # Exit condition: either hit max length or find stop character.
-            if (sampled_word == '\n' or len(decoded_sentence.split(' ')) > self.max_decoder_seq_length):
-                stop_condition = True
+#         # Count texts, tokens and maximum sequence lengths
+#         self.num_encoder_tokens = len(input_words)
+#         self.num_decoder_tokens = len(target_words)
+#         self.max_encoder_seq_length = max([len(input_text.split(' ')) for input_text in input_texts])
+#         self.max_decoder_seq_length = max([len(target_text.split(' ')) for target_text in target_texts])
 
-            # Update the target sequence (of length 1).
-            target_seq = np.zeros((1, 1, self.num_decoder_tokens))
-            target_seq[0, 0, sampled_token_index] = 1.
+#         # Index each word in input vocabulary
+#         self.input_token_index = dict([
+#             (word, i) for i, word in enumerate(input_words)
+#         ])
 
-            # Update states
-            states_value = [h, c]
+#         # Index each word in target vocabulary
+#         self.target_token_index = dict([
+#             (word, i) for i, word in enumerate(target_words)
+#         ])
 
-        return decoded_sentence
+#         encoder_input_data = np.zeros((len(input_texts), self.max_encoder_seq_length, self.num_encoder_tokens), dtype='uint8')
 
-    def clean_raw_sentence(self, sentence):
-        '''
-        Seperate all dosages and units (e.g. 350mgs -> 350 mgs)
-        contained with a sentence
-        '''
-        updated_sentence = ''
-        for component in re.split('(\d+)', sentence):
-            updated_sentence += component.strip() + ' '
-        return ' '.join(updated_sentence.split(' ')).lower()
+#         for i, input_text in enumerate(input_texts):
+#             for t, word in enumerate(input_text.split(' ')):
+#                 encoder_input_data[i, t, self.input_token_index[word]] = 1.
+#             encoder_input_data[i, t + 1:, self.input_token_index[' ']] = 1.
 
-    def predict(self, raw_sentence):
-        '''
-        Predict single prescription contained
-        within sentence (extracting drug name,
-        dosage, unit, frequency)
-        '''
-        clean_sentence = self.clean_raw_sentence(raw_sentence)
+#         # Restore the model
+#         self.model = load_model(self.model_path)
 
-        if len(clean_sentence.split(' ')) >= self.max_encoder_seq_length:
-            vector = np.zeros((1, len(clean_sentence.split(' ')) + 1, self.num_encoder_tokens), dtype='uint8')
-        else:
-            vector = np.zeros((1, self.max_encoder_seq_length, self.num_encoder_tokens), dtype='uint8')
+#         # Construct the encoder
+#         encoder_inputs = self.model.input[0]
+#         encoder_outputs, state_h_enc, state_c_enc = self.model.layers[2].output
+#         encoder_states = [state_h_enc, state_c_enc]
+#         self.encoder_model = Model(encoder_inputs, encoder_states)
 
-        for i, word in enumerate(clean_sentence.split(' ')):
-            if word in self.input_token_index:
-                vector[0, i, self.input_token_index[word]] = 1.
-        vector[0, i + 1, self.input_token_index[' ']] = 1.
+#         # Construct the decoder
+#         decoder_inputs = self.model.input[1]
+#         decoder_state_input_h = Input(shape=(self.latent_dim,), name='input_3')
+#         decoder_state_input_c = Input(shape=(self.latent_dim,), name='input_4')
+#         decoder_states_inputs = [decoder_state_input_h, decoder_state_input_c]
+#         decoder_lstm = self.model.layers[3]
+#         decoder_outputs, state_h_dec, state_c_dec = decoder_lstm(
+#             decoder_inputs,
+#             initial_state=decoder_states_inputs
+#         )
+#         decoder_states = [state_h_dec, state_c_dec]
+#         decoder_dense = self.model.layers[4]
+#         decoder_outputs = decoder_dense(decoder_outputs)
+#         self.decoder_model = Model(
+#             [decoder_inputs] + decoder_states_inputs,
+#             [decoder_outputs] + decoder_states
+#         )
 
-        sequence = self.decode_sequence(vector).strip().split('; ')
+#         # Reverse-lookup token index to decode sequences back to readable form
+#         self.reverse_target_word_index = dict(
+#             (i, word) for word, i in self.target_token_index.items()
+#         )
 
-        if not self.is_valid_prediction(clean_sentence, sequence):
-            return None
+#     def decode_sequence(self, input_seq):
+#         # Encode the input as state vectors.
+#         states_value = self.encoder_model.predict(input_seq)
 
-        return {'sentence': raw_sentence, 'attributes': self.parse_attributes(sequence)}
+#         # Generate empty target sequence of length 1.
+#         target_seq = np.zeros((1, 1, self.num_decoder_tokens))
 
-    def is_valid_prediction(self, in_seq, out_seq):
-        if len(out_seq[0].split('dn: ')) <= 1 or len(out_seq[1].split('dd: ')) <= 1:
-            return False
+#         # Populate the first character of target sequence with the start token
+#         target_seq[0, 0, self.target_token_index['\t']] = 1.
+
+#         # Sampling loop for a batch of sequences
+#         stop_condition = False
+#         decoded_sentence = ''
+#         while not stop_condition:
+#             output_tokens, h, c = self.decoder_model.predict([target_seq] + states_value)
+
+#             # Sample a token
+#             sampled_token_index = np.argmax(output_tokens[0, -1, :])
+#             sampled_word = self.reverse_target_word_index[sampled_token_index]
+
+#             decoded_sentence += sampled_word + ' '
+
+#             # Exit condition: either hit max length or find stop character.
+#             if (sampled_word == '\n' or len(decoded_sentence.split(' ')) > self.max_decoder_seq_length):
+#                 stop_condition = True
+
+#             # Update the target sequence (of length 1).
+#             target_seq = np.zeros((1, 1, self.num_decoder_tokens))
+#             target_seq[0, 0, sampled_token_index] = 1.
+
+#             # Update states
+#             states_value = [h, c]
+
+#         return decoded_sentence
+
+#     def clean_raw_sentence(self, sentence):
+#         '''
+#         Seperate all dosages and units (e.g. 350mgs -> 350 mgs)
+#         contained with a sentence
+#         '''
+#         updated_sentence = ''
+#         for component in re.split('(\d+)', sentence):
+#             updated_sentence += component.strip() + ' '
+#         return ' '.join(updated_sentence.split(' ')).lower()
+
+#     def predict(self, raw_sentence):
+#         '''
+#         Predict single prescription contained
+#         within sentence (extracting drug name,
+#         dosage, unit, frequency)
+#         '''
+#         clean_sentence = self.clean_raw_sentence(raw_sentence)
+
+#         if len(clean_sentence.split(' ')) >= self.max_encoder_seq_length:
+#             vector = np.zeros((1, len(clean_sentence.split(' ')) + 1, self.num_encoder_tokens), dtype='uint8')
+#         else:
+#             vector = np.zeros((1, self.max_encoder_seq_length, self.num_encoder_tokens), dtype='uint8')
+
+#         for i, word in enumerate(clean_sentence.split(' ')):
+#             if word in self.input_token_index:
+#                 vector[0, i, self.input_token_index[word]] = 1.
+#         vector[0, i + 1, self.input_token_index[' ']] = 1.
+
+#         sequence = self.decode_sequence(vector).strip().split('; ')
+
+#         if not self.is_valid_prediction(clean_sentence, sequence):
+#             return None
+
+#         return {'sentence': raw_sentence, 'attributes': self.parse_attributes(sequence)}
+
+#     def is_valid_prediction(self, in_seq, out_seq):
+#         if len(out_seq[0].split('dn: ')) <= 1 or len(out_seq[1].split('dd: ')) <= 1:
+#             return False
     
-        drug_name = out_seq[0].split('dn: ')[1]
-        drug_dose = out_seq[1].split('dd: ')[1]
+#         drug_name = out_seq[0].split('dn: ')[1]
+#         drug_dose = out_seq[1].split('dd: ')[1]
 
-        # Ignore suggestions where name / dose not in sentence
-        if len(out_seq) != 4 or \
-           drug_name not in in_seq or \
-           drug_dose not in in_seq:
-            return False
-        return True
+#         # Ignore suggestions where name / dose not in sentence
+#         if len(out_seq) != 4 or \
+#            drug_name not in in_seq or \
+#            drug_dose not in in_seq:
+#             return False
+#         return True
 
-    def parse_attributes(self, output_sequence):
-        attributes = [
-            'DrugName: ' + output_sequence[0].split('dn: ')[1],
-            'DrugDose: ' + output_sequence[1].split('dd: ')[1],
-            'DoseUnit: ' + output_sequence[2].split('du: ')[1],
-            'Frequency: ' + output_sequence[3].split('df: ')[1]
-        ]
+#     def parse_attributes(self, output_sequence):
+#         attributes = [
+#             'DrugName: ' + output_sequence[0].split('dn: ')[1],
+#             'DrugDose: ' + output_sequence[1].split('dd: ')[1],
+#             'DoseUnit: ' + output_sequence[2].split('du: ')[1],
+#             'Frequency: ' + output_sequence[3].split('df: ')[1]
+#         ]
 
-        # Get ontology term and cui
-        ontology_term, ontology_cui = '', ''
-        if simstring_searcher is not None:
-            ranked_matches = get_ranked_ontology_matches(
-                clean_selected_term(output_sequence[0].split('dn: ')[1])
-            )
+#         # Get ontology term and cui
+#         ontology_term, ontology_cui = '', ''
+#         if simstring_searcher is not None:
+#             ranked_matches = get_ranked_ontology_matches(
+#                 clean_selected_term(output_sequence[0].split('dn: ')[1])
+#             )
 
-            if len(ranked_matches) != 0:
-                ontology_match = ranked_matches[0].split(' :: UMLS ')
-                attributes.append('CUIPhrase: ' + ontology_match[0])
-                attributes.append('CUI: ' + ontology_match[1])
+#             if len(ranked_matches) != 0:
+#                 ontology_match = ranked_matches[0].split(' :: UMLS ')
+#                 attributes.append('CUIPhrase: ' + ontology_match[0])
+#                 attributes.append('CUI: ' + ontology_match[1])
         
-        return attributes
+#         return attributes
 
-    def train(self, instance, label):
-        pass
+#     def train(self, instance, label):
+#         pass
 
-# Project path
+# # Project path
 PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-# Define active learner for classifying target sentences
-sentence_classifier = SentenceClassifier(PATH)
+# # Define active learner for classifying target sentences
+# sentence_classifier = SentenceClassifier(PATH)
 
-# Define annotation prediction model
-annotation_predictor = Seq2Seq(PATH)
+# # Define annotation prediction model
+# annotation_predictor = Seq2Seq(PATH)
 
 # Simstring parameters
 SIMILARITY_THRESHOLD = 0.7
