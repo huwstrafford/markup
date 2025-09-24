@@ -219,7 +219,7 @@ def get_ranked_ontology_matches(cleaned_term):
         )
 
         # Construct match key with divisor
-        key = ontology_term + ' :: UMLS ' + ontology_cui
+        key = ontology_term + ' :: ' + ontology_cui
         weighted_matches[key] = levenshtein_distance
 
     # Construct list of ranked terms based on levenshtein distasnce value

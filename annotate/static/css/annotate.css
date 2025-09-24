@@ -49,7 +49,7 @@
 
 .item-2 {
   flex-grow: 2;
-  max-width: 49.5%;
+  max-width: 90.5%;
 }
 
 #config-data {
@@ -243,4 +243,24 @@ input[type=radio] {
   padding-bottom: 5%;
   text-align: center;
   font-weight: bold;
+}
+
+
+.footer {
+text-align: center;
+position: sticky;
+bottom: 0;
+border: 2px solid black;
+margin-left: 10%;
+margin-right: 10%;
+width: 80%;
+}
+
+
+select {
+  max-height: 100px;
+  overflow-y: auto;
+  width:90%;
+  text-align: center;
+  font-size: larger;
 }

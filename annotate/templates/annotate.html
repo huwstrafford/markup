@@ -21,10 +21,10 @@
                 </div>
 
                 <div id="settings">
-                    <br>
-                    <select id="match-list" class="dropdown">
+                    <!-- <br> -->
+                    <!-- <select id="match-list" class="dropdown">
                         <option>No match</option>
-                    </select>
+                    </select> -->
                     <br>
                     <input id="ontology-search-input-field" class="input-field" placeholder="Search ontology"/>
                     <br><br>
@@ -34,10 +34,15 @@
             </div>
         </div>
 
-        <div id="file-data" class="item item-2 standard-text"></div>
+        <div id="text-area"> 
+            <div id="file-data" class="item item-2 standard-text"></div>
+            <select id="footer-check" size="1" class="footer item-2 standard-text dropdown">
+                <option>No match</option>
+            </select>
+        </div> 
 
         <div id="annotation-data" class="item item-1 standard-text unselectable">
-            <div id="annotation-suggestion-container">
+            <!-- <div id="annotation-suggestion-container">
                 <div id="annotation-suggestion-quantity" class="annotation collapsible">
                     <span id="annotation-suggestion-quantity-loader">
                         <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
@@ -47,7 +52,7 @@
                     <span id="annotation-suggestion-quantity-value"></span>
                 </div>
                 <div id="annotation-suggestion-list" class="content"></div>
-            </div>
+            </div> -->
         </div>
     </div>
 {% endblock %}

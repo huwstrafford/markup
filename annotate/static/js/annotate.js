@@ -30,7 +30,7 @@ function initializeSession() {
     setupScrollbars();
     setupNavigationMenu();
     setupConfigs();
-    suggestDocumentAnnotations();
+    //suggestDocumentAnnotations();
 }
 
 function initializeIds() {
@@ -344,7 +344,7 @@ function openNewDocument() {
 
     // Update title, doc text and active nav item
     $('title')[0].innerText = docName + ' - Markup';
-    $('#file-data').text(docText);
+    $('#file-data').text(docText); // Here!
     $('#switch-file-dropdown').prop('selectedIndex', openDocId);
 }
 
@@ -856,14 +856,18 @@ function bindAnnotationEvents() {
     });
 
     // Suggest ontology matches based on selected text 
+    // $('#file-data').mouseup({
+    //     'type': 'highlight'
+    // }, suggestOntologyMapping);
+    
     $('#file-data').mouseup({
         'type': 'highlight'
-    }, suggestOntologyMapping);
+    }, suggestOntologyMapping2);
 
     // Suggest ontology matches based on search text
     $('#ontology-search-input-field').on('input', {
         'type': 'search'
-    }, suggestOntologyMapping);
+    }, suggestOntologyMapping2);
 
     // Prompt user to save annotations before exiting session
     $('a[class=nav-item]').click(function() {
@@ -1085,21 +1089,21 @@ function getFormattedAttributes() {
     }
 
     // Construct attributes from ontology mapping
-    const ontologyOption = $('#match-list')[0].options[$('#match-list')[0].selectedIndex];
-    if (isValidOntologyMapping(ontologyOption.text)) {
-        aValue++;
-        const ontologyCode = ontologyOption.title.split(' ')[1];
-        result.push(formatAttribute('ontology', aValue, 'CUIPhrase', ontologyOption.text));
-        result.push(formatAttribute('ontology', aValue, 'CUI', ontologyCode));
-    }
+    // const ontologyOption = $('#match-list')[0].options[$('#match-list')[0].selectedIndex];
+    // if (isValidOntologyMapping(ontologyOption.text)) {
+    //     aValue++;
+    //     const ontologyCode = ontologyOption.title.split(' ')[1];
+    //     result.push(formatAttribute('ontology', aValue, 'CUIPhrase', ontologyOption.text));
+    //     result.push(formatAttribute('ontology', aValue, 'CUI', ontologyCode));
+    // }
 
     return result;
 }
 
 function formatAttribute(type, aValue, key, value=null) {
     const openDocId = localStorage.getItem('openDocId');
-    console.log(aValue);
-    console.log(attributeIds[openDocId]);
+    // console.log(aValue);
+    // console.log(attributeIds[openDocId]);
     // var aValue = getMaxAValue();
     // console.log(attributeIds);
     if (type == 'checkbox') {
@@ -1186,23 +1190,37 @@ function resetAnnotationSelections() {
     $('input[name=values]').css('display', 'none');
     $('input[name=values]').val('');
     $('#config-data')[0].scrollTop = 0;
-    $('#match-list')[0].options.length = 1;
-    $('#match-list')[0].options[0].innerText = 'No match';
+    // $('#match-list')[0].options.length = 1;
+    // $('#match-list')[0].options[0].innerText = 'No match';
+    $('#footer-check')[0].options.length = 1;
+    $('#footer-check')[0].options[0].innerText = 'No match';
     $('#ontology-search-input-field').val('');
     removeEntityStyling();
     activeEntity = '';
 }
 
-function suggestOntologyMapping(event) {
+// function suggestOntologyMapping(event) {
+//     // Get relevant matches from defined ontology
+//     const queryType = event.data.type;
+//     const dropdown = $('#match-list')[0];
+//     const inputText = getInputText(queryType);
+
+//     // Ignore invalid inputs
+//     if (inputText == '' || inputText.split(' ').length > 8) return;
+
+//     displayOntologySuggestions(dropdown, inputText);
+// }
+
+function suggestOntologyMapping2(event) {
     // Get relevant matches from defined ontology
     const queryType = event.data.type;
-    const dropdown = $('#match-list')[0];
+    const dropdown = $('#footer-check')[0];
     const inputText = getInputText(queryType);
 
     // Ignore invalid inputs
     if (inputText == '' || inputText.split(' ').length > 8) return;
 
-    displayOntologySuggestions(dropdown, inputText);
+    displayOntologySuggestions2(dropdown, inputText);
 }
 
 function getInputText(queryType) {
@@ -1215,7 +1233,20 @@ function getInputText(queryType) {
     return '';
 }
 
-function displayOntologySuggestions(dropdown, inputText) {
+// function displayOntologySuggestions(dropdown, inputText) {
+//     $.ajax({
+//         type: 'GET',
+//         url: 'suggest-cui/',
+//         async: false,
+//         data: {inputText: inputText},
+//         success: function (response) {
+//             dropdown.options.length = 0;
+//             populateOntologyDropdown(JSON.parse(response), dropdown);
+//         }
+//     });
+// }
+
+function displayOntologySuggestions2(dropdown, inputText) {
     $.ajax({
         type: 'GET',
         url: 'suggest-cui/',
@@ -1223,7 +1254,7 @@ function displayOntologySuggestions(dropdown, inputText) {
         data: {inputText: inputText},
         success: function (response) {
             dropdown.options.length = 0;
-            populateOntologyDropdown(JSON.parse(response), dropdown);
+            populateOntologyDropdown2(JSON.parse(response), dropdown);
         }
     });
 }
@@ -1239,6 +1270,28 @@ function populateOntologyDropdown(matches, dropdown) {
         for (let i = 0; i < matches.length; i++) {
             const match = document.createElement('option');
             match.text = matches[i].split(' :: ')[0];
+            match.title = matches[i].split(' :: ')[1];
+            dropdown.add(match);
+        }
+        return;
+    }
+    // Add default option
+    const option = document.createElement('option');
+    option.text = 'No match';
+    dropdown.add(option);
+}
+
+function populateOntologyDropdown2(matches, dropdown) {
+    if (matches.length > 0 && matches[0] != '') {
+        // Add match count
+        // const count = document.createElement('option');
+        // count.text = matches.length + ' matches found';
+        // dropdown.add(count);
+
+        // Add matches
+        for (let i = 0; i < matches.length; i++) {
+            const match = document.createElement('option');
+            match.text = matches[i].split(' :: ')[0] + "  -  " + matches[i].split(' :: ')[1];
             match.title = matches[i].split(' :: ')[1];
             dropdown.add(match);
         }
@@ -1321,34 +1374,34 @@ function removeEntityStyling() {
     });
 }
 
-function suggestDocumentAnnotations() {
-    // Get open document text and existing annotations
-    const openDocId = localStorage.getItem('openDocId');
-    const docText = localStorage.getItem('docText' + openDocId);
-    const annotationTexts = getAnnotationTexts(openDocId);
+// function suggestDocumentAnnotations() {
+//     // Get open document text and existing annotations
+//     const openDocId = localStorage.getItem('openDocId');
+//     const docText = localStorage.getItem('docText' + openDocId);
+//     const annotationTexts = getAnnotationTexts(openDocId);
     
-    // Reset list and display loader
-    prepareSuggestionPanel();
+//     // Reset list and display loader
+//     prepareSuggestionPanel();
 
-    $.ajax({
-        type: 'POST',
-        url: 'suggest-annotations/',
-        data: { 
-            'docText': docText,
-            'annotationTexts': JSON.stringify(annotationTexts)
-        }, success: function (response) {
-            // Ensure open doc is the same as when the suggestion service began
-            if (openDocId == localStorage.getItem('openDocId')) {
-                // Hide loader and add suggestions
-                $('#annotation-suggestion-quantity-loader').css('display', 'none');
-                addSuggestionsToDisplay(JSON.parse(response));
-            }
-        }
-    }).done(function () {
-        // Add events to suggestions 
-        bindAnnotationEvents();
-    });
-}
+//     $.ajax({
+//         type: 'POST',
+//         url: 'suggest-annotations/',
+//         data: { 
+//             'docText': docText,
+//             'annotationTexts': JSON.stringify(annotationTexts)
+//         }, success: function (response) {
+//             // Ensure open doc is the same as when the suggestion service began
+//             if (openDocId == localStorage.getItem('openDocId')) {
+//                 // Hide loader and add suggestions
+//                 $('#annotation-suggestion-quantity-loader').css('display', 'none');
+//                 addSuggestionsToDisplay(JSON.parse(response));
+//             }
+//         }
+//     }).done(function () {
+//         // Add events to suggestions 
+//         bindAnnotationEvents();
+//     });
+// }
 
 function prepareSuggestionPanel() {
     // Reset suggestion quantity value and display loader
