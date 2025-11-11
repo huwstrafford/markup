@@ -1057,10 +1057,17 @@ function getMaxTValue() {
     // console.log(annotationTextArray[1]);
     // console.log(annotationText.length);
     const TValues = [];
-    for (let i = 0; i < annotationTextArray.length; i++) {
-        if (annotationTextArray[i].startsWith("T")) {
-            TValues.push(annotationTextArray[i].split(" ")[0].split('\t')[0].split('T')[1]);
-        }
+    // if annoation text is empty return 0
+    if (annotationText.trim() == '') {
+        TValues.push(1);
+    }
+    // else caluclate max value from below
+    else 
+        {for (let i = 0; i < annotationTextArray.length; i++) {
+            if (annotationTextArray[i].startsWith("T")) {
+                 TValues.push(annotationTextArray[i].split(" ")[0].split('\t')[0].split('T')[1]);
+             }
+            }
     }
     // console.log(TValues);
     return Math.max(...TValues);
@@ -1121,14 +1128,36 @@ function getMaxAValue() {
     // console.log(annotationTextArray[1]);
     // console.log(annotationText.length);
     const TValues = [];
-    for (let i = 0; i < annotationTextArray.length; i++) {
-        if (annotationTextArray[i].startsWith("A")) {
-            TValues.push(annotationTextArray[i].split(" ")[0].split('\t')[0].split('A')[1]);
+    //if annoation text is empty return 0
+    if (annotationText.trim() == '') {
+        TValues.push(1);
+    }
+    else {
+    // else caluclate max value from below
+        for (let i = 0; i < annotationTextArray.length; i++) {
+            if (annotationTextArray[i].startsWith("A")) {
+                TValues.push(annotationTextArray[i].split(" ")[0].split('\t')[0].split('A')[1]);
+            }
         }
     }
     // console.log(TValues);
     return Math.max(...TValues);
 }
+
+    // const TValues = [];
+    // // if annoation text is empty return 0
+    // if (annotationText.trim() == '') {
+    //     TValues.push(1);
+    // }
+    // // else caluclate max value from bellow
+    // else 
+    //     {for (let i = 0; i < annotationTextArray.length; i++) {
+    //         if (annotationTextArray[i].startsWith("T")) {
+    //              TValues.push(annotationTextArray[i].split(" ")[0].split('\t')[0].split('T')[1]);
+    //          }
+    //         }
+    // }
+
 
 function normaliseText(raw) {
     // Replace spaces with hyphens
