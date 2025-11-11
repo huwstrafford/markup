@@ -19,6 +19,15 @@ $(document).ready(function () {
         $('#ViewDifferenceOnly').show()
         $('#ViewAllAnnotations').hide()
     });
+
+    // Synchronized scrolling function for both document panels
+    $('#file-data-1').on('scroll', function () {
+        $('#file-data-2').scrollTop($(this).scrollTop());
+    });
+
+    $('#file-data-2').on('scroll', function () {
+        $('#file-data-1').scrollTop($(this).scrollTop());
+    }); 
 });
 
 function setupSession(isNewSession) {
