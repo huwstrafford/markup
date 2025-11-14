@@ -6,6 +6,8 @@
     <link href="{% static 'css/third-party/perfect-scrollbar.css' %}" rel="stylesheet" />
     <link href="{% static 'css/annotate.css' %}" rel="stylesheet" />
     <script src="{% static 'js/third-party/perfect-scrollbar.min.js' %}"></script>
+    <script src="{% static 'js/third-party/FileSaver.min.js' %}"></script>
+    <script src="{% static 'js/third-party/jszip.min.js' %}"></script>
     <script src="{% static 'js/annotate.js' %}"></script>
 {% endblock %}
 
@@ -29,7 +31,9 @@
                     <input id="ontology-search-input-field" class="input-field" placeholder="Search ontology"/>
                     <br><br>
                     <button id="add-annotation" class="main-button green-button">+ Annotation</button>
-                    <a id="save-annotation-file"><button id="add-annotation" class="main-button gray-button">Export</button></a>
+                    <a id="save-annotation-file"><button id="add-annotation" class="main-button gray-button">Export This</button></a>
+                    <br>
+                    <button id="save-all-annotations" class="main-button gray-button">Export All</button>
                 </div>
             </div>
         </div>

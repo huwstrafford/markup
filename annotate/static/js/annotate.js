@@ -1630,6 +1630,9 @@ function updateExportUrl(output) {
     exportButton.download = docName;
 }
 
+
+
+
 // set entity ID and attribute ID here - read the annotation file and set the ID to the last ID in the file
 let entityIds = [];
 let attributeIds = [];
@@ -1642,6 +1645,48 @@ let colors = getColors(entities.length);
 
 const ENTITY_TAG = 'T';
 const ATTRIBUTE_TAG = 'A';
+
+// function to save/export all annotations for all documents in the session
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const saveBtn = document.getElementById("save-all-annotations");
+
+    if (!saveBtn) {
+        console.warn("Button #save-all-annotations not found in DOM");
+        return;
+    }
+
+    saveBtn.addEventListener("click", () => {
+        try {
+            const zip = new JSZip();
+            const folder = zip.folder("annotations");
+
+            // Gather all annotationText items from Local Storage
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith("annotationText")) {
+                    const text = localStorage.getItem(key);
+                    folder.file(`${key}.ann`, text || "");
+                }
+            }
+
+            // Generate ZIP and download
+            zip.generateAsync({ type: "blob" })
+                .then(blob => {
+                    saveAs(blob, "annotations.zip");
+                })
+                .catch(error => {
+                    console.error("ZIP generation error:", error);
+                });
+
+        } catch (err) {
+            console.error("Error creating ZIP:", err);
+        }
+    });
+
+});
+
 
 // End session if cookies are disabled
 session.validateCookies();
