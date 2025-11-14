@@ -1662,23 +1662,29 @@ document.addEventListener("DOMContentLoaded", () => {
             const zip = new JSZip();
             const folder = zip.folder("annotations");
 
-            // Gather all annotationText items from Local Storage
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith("annotationText")) {
-                    const text = localStorage.getItem(key);
-                    folder.file(`${key}.ann`, text || "");
+            const annotationCount = parseInt(localStorage.getItem("docCount")) || 0;
+
+            for (let i = 0; i < annotationCount; i++) {
+                const textKey = `annotationText${i}`;
+                const nameKey = `docName${i}`;
+                let text = localStorage.getItem(textKey);
+                let fileName = localStorage.getItem(nameKey);
+
+                // Fallback filename if missing
+                if (!fileName) fileName = textKey;
+                fileName += ".ann";
+
+                // Fallback empty content if missing
+                if (text === null || text === undefined) {
+                    text = ""; // blank file
                 }
+
+                folder.file(fileName, text);
             }
 
-            // Generate ZIP and download
             zip.generateAsync({ type: "blob" })
-                .then(blob => {
-                    saveAs(blob, "annotations.zip");
-                })
-                .catch(error => {
-                    console.error("ZIP generation error:", error);
-                });
+                .then(blob => saveAs(blob, "annotations.zip"))
+                .catch(err => console.error("ZIP generation error:", err));
 
         } catch (err) {
             console.error("Error creating ZIP:", err);
